@@ -11,18 +11,11 @@ public class FarmWorldRunner {
 
 	public static void main(String[] args) {
 		ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(20, 20));
-	    world.add(new Animal(12));
-	    world.add(new Animal(5));
-	    world.add(new Animal());
+	   world.add(new Sheep());
+	   world.add(new Sheep());
 	    
 	    
-	    
-	    world.add(new Flower());
-	    world.add(new Flower());
-	    world.add(new Flower());
-	    world.add(new Flower());
-	    world.add(new Flower());
-	    world.add(new Flower());
+	   
 	    
 	    
 	    world.add(new Farmer());
