@@ -39,6 +39,6 @@ class Sheep extends Animal {
 	
 	void setNewSheep() {
 		Location newSheepPosition = getLocationsForNewSheep().get(0);
-	}
+		}
 
 }
