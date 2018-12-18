@@ -38,6 +38,7 @@ class Animal extends Actor{
             move();
         else
             turn();
+        age++;
     }
 
     /**
