@@ -35,15 +35,14 @@ class Animal extends Actor{
 	
 	// Adapted from Class Critter
 	@Override
-	public void act()
-    {
-	 if (getGrid() == null)
-            return;
-        ArrayList<Location> moveLocs = getMoveLocations();
-        Location loc = selectMoveLocation(moveLocs);
-        makeMove(loc);
-        age++;
-    }
+	public void act() {
+		if (getGrid() == null)
+			 return;
+	    ArrayList<Location> moveLocs = getMoveLocations();
+	    Location loc = selectMoveLocation(moveLocs);
+	    makeMove(loc);
+	    age++;
+	}
 
 	public ArrayList<Location> getMoveLocations()
     {
