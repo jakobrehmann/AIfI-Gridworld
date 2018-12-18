@@ -23,12 +23,10 @@ class Sheep extends Animal {
 	
 	// Adapted from Class Animal
 		@Override
-		public void act()
-	    {
-	        if (canMove())
-	            move();
-	        else
-	            turn();
+		public void act() {
+		super.act() ;
+		
+		
 	        
 	    }
 		

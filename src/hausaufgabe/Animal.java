@@ -5,6 +5,8 @@
 
 package hausaufgabe;
 
+import java.util.ArrayList;
+
 import gridworld.framework.actor.Actor;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
@@ -30,58 +32,62 @@ class Animal extends Actor{
 	}
 	
 	
-	// Adapted from Class Bug
+	
+	// Adapted from Class Critter
 	@Override
 	public void act()
     {
-        if (canMove())
-            move();
-        else
-            turn();
+	 if (getGrid() == null)
+            return;
+        ArrayList<Location> moveLocs = getMoveLocations();
+        Location loc = selectMoveLocation(moveLocs);
+        makeMove(loc);
         age++;
     }
 
-    /**
-     * Turns the bug 45 degrees to the right without changing its location.
-     */
-    public void turn()
+	public ArrayList<Location> getMoveLocations()
     {
-        setDirection(getDirection() + Location.HALF_RIGHT);
+        return getGrid().getEmptyAdjacentLocations(getLocation());
     }
 
     /**
-     * Moves the bug forward
+     * Selects the location for the next move. Implemented to randomly pick one
+     * of the possible locations, or to return the current location if
+     * <code>locs</code> has size 0. Override this method in subclasses that
+     * have another mechanism for selecting the next move location. <br />
+     * Postcondition: (1) The returned location is an element of
+     * <code>locs</code>, this critter's current location, or
+     * <code>null</code>. (2) The state of all actors is unchanged.
+     * @param locs the possible locations for the next move
+     * @return the location that was selected for the next move.
      */
-    public void move()
+    public Location selectMoveLocation(ArrayList<Location> locs)
     {
-        Grid<Actor> gr = getGrid();
-        if (gr == null)
-            return;
-        Location loc = getLocation();
-        Location next = loc.getAdjacentLocation(getDirection());
-        if (gr.isValid(next))
-            moveTo(next);
-        else
+        int n = locs.size();
+        if (n == 0)
+            return getLocation();
+        int r = (int) (Math.random() * n);
+        return locs.get(r);
+    }
+
+    /**
+     * Moves this critter to the given location <code>loc</code>, or removes
+     * this critter from its grid if <code>loc</code> is <code>null</code>.
+     * An actor may be added to the old location. If there is a different actor
+     * at location <code>loc</code>, that actor is removed from the grid.
+     * Override this method in subclasses that want to carry out other actions
+     * (for example, turning this critter or adding an occupant in its previous
+     * location). <br />
+     * Postcondition: (1) <code>getLocation() == loc</code>. (2) The state of
+     * all actors other than those at the old and new locations is unchanged.
+     * @param loc the location to move to
+     */
+    public void makeMove(Location loc)
+    {
+        if (loc == null)
             removeSelfFromGrid();
-    }
-
-    /**
-     * Tests whether this bug can move forward into a location that is empty
-     * @return true if this bug can move.
-     */
-    public boolean canMove()
-    {
-        Grid<Actor> gr = getGrid();
-        if (gr == null)
-            return false;
-        Location loc = getLocation();
-        Location next = loc.getAdjacentLocation(getDirection());
-        if (!gr.isValid(next))
-            return false;
-        Actor neighbor = gr.get(next);
-        return (neighbor == null); 
-        // ok to move into empty location
-        // not ok to move onto any other actor
+        else
+            moveTo(loc);
     }
     
     @Override
