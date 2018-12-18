@@ -1,3 +1,9 @@
+/* 
+ * Problem 1.2 - Schaf
+ * @author Marcel
+ */
+
+
 package hausaufgabe;
 
 import java.util.ArrayList;
@@ -23,11 +29,16 @@ class Sheep extends Animal {
 	            move();
 	        else
 	            turn();
+	        
 	    }
 		
 	// Adapted from Class Critter
-	public ArrayList<Location> getMoveLocations() {
+	public ArrayList<Location> getLocationsForNewSheep() {
 	       return getGrid().getEmptyAdjacentLocations(getLocation());
+	}
+	
+	void setNewSheep() {
+		Location newSheepPosition = getLocationsForNewSheep().get(0);
 	}
 
 }
