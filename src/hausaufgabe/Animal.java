@@ -32,6 +32,7 @@ class Animal extends Actor{
 	}
 	
 	
+	
 	// Adapted from Class Critter
 	@Override
 	public void act()
