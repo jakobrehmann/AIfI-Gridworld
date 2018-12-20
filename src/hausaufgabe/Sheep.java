@@ -13,10 +13,13 @@ import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 class Sheep extends Animal {
+	
+	private int lastTimeSheared;
 
 	public Sheep(int age) {
 		super(age);
 		// TODO Auto-generated constructor stub
+		lastTimeSheared = 7;
 	}
 
 	public Sheep() {
@@ -33,13 +36,13 @@ class Sheep extends Animal {
 		}
 		
 		if (age >= 10 && Math.random() < 0.1666666) {
-			eventOfDeath();
+			dies();
 		}
-		
+		lastTimeSheared++;	
 	        
 	}
 
-	void eventOfDeath() {
+	void dies() {
 		
 		Location loc = getLocation();
 		Grid<Actor> grid = getGrid();
@@ -57,12 +60,19 @@ class Sheep extends Animal {
 	
 	void setNewSheep() {
 		if (getLocationsForNewSheep().isEmpty()){
-		} else { 	
-			Location newSheepPosition = getLocationsForNewSheep().get(0);
-			Sheep newSheep = new Sheep();
-			newSheep.putSelfInGrid(getGrid(), newSheepPosition);
-		}
-		
+			return;
+		}	
+		Location newSheepPosition = getLocationsForNewSheep().get(0);
+		Sheep newSheep = new Sheep();
+		newSheep.putSelfInGrid(getGrid(), newSheepPosition);		
+	}
+	
+	void getsSheared() {
+		lastTimeSheared = 0;
+	}
+	
+	int getLastTimeSheared() {
+		return lastTimeSheared;
 	}
 
 }
