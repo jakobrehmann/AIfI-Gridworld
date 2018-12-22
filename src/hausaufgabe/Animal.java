@@ -1,5 +1,6 @@
 /* 
  * Problem 1.1 - Tier
+ * Problem 1.7 - Herdentrieb
  * @author Jakob
  */
 
@@ -39,50 +40,50 @@ class Animal extends Actor{
 		if (getGrid() == null)
 			 return;
 	    ArrayList<Location> moveLocs = getMoveLocations();
+	    
+	    ArrayList<Location> herdLocs = getHerdLocations(moveLocs) ; // Herd Behavior : if Sheep/Lambs are nearby, only those move locations are included in moveLocs
+	   
+	    if (herdLocs.size() > 0) {
+	    	moveLocs = herdLocs ;
+	    }
+	    
 	    Location loc = selectMoveLocation(moveLocs);
 	    makeMove(loc);
 	    age++;
 	}
 
-	public ArrayList<Location> getMoveLocations()
-    {
+	public ArrayList<Location> getMoveLocations(){
         return getGrid().getEmptyAdjacentLocations(getLocation());
     }
+	
+	
+    public ArrayList<Location> getHerdLocations(ArrayList<Location> locs) {
+        ArrayList<Location> herdLocs = new ArrayList<Location>();
+        Grid<Actor> gr = getGrid() ;
+        
+        for (Location loc : locs) {
+        	ArrayList<Location> neighborLocs = gr.getValidAdjacentLocations(loc) ;
+        	neighborLocs.remove(getLocation()) ; // removes the Sheep who we are trying to move
+        	for (Location neighborLoc : neighborLocs){
+        		 if ((gr.get(neighborLoc) instanceof Sheep) || (gr.get(neighborLoc) instanceof Lamb)) {
+        			 herdLocs.add(loc);
+        			 break ;
+        		 } 
+             }
+        }
+        return herdLocs ;       
+    }
 
-    /**
-     * Selects the location for the next move. Implemented to randomly pick one
-     * of the possible locations, or to return the current location if
-     * <code>locs</code> has size 0. Override this method in subclasses that
-     * have another mechanism for selecting the next move location. <br />
-     * Postcondition: (1) The returned location is an element of
-     * <code>locs</code>, this critter's current location, or
-     * <code>null</code>. (2) The state of all actors is unchanged.
-     * @param locs the possible locations for the next move
-     * @return the location that was selected for the next move.
-     */
-    public Location selectMoveLocation(ArrayList<Location> locs)
-    {
+    public Location selectMoveLocation(ArrayList<Location> locs){
         int n = locs.size();
         if (n == 0)
-            return getLocation();
+            return getLocation();      
         int r = (int) (Math.random() * n);
         return locs.get(r);
     }
 
-    /**
-     * Moves this critter to the given location <code>loc</code>, or removes
-     * this critter from its grid if <code>loc</code> is <code>null</code>.
-     * An actor may be added to the old location. If there is a different actor
-     * at location <code>loc</code>, that actor is removed from the grid.
-     * Override this method in subclasses that want to carry out other actions
-     * (for example, turning this critter or adding an occupant in its previous
-     * location). <br />
-     * Postcondition: (1) <code>getLocation() == loc</code>. (2) The state of
-     * all actors other than those at the old and new locations is unchanged.
-     * @param loc the location to move to
-     */
-    public void makeMove(Location loc)
-    {
+    
+    public void makeMove(Location loc){
         if (loc == null)
             removeSelfFromGrid();
         else

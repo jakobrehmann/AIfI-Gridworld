@@ -32,7 +32,7 @@ class Sheep extends Animal {
 		super.act() ;
 		
 		if (Math.random() < 0.2) {
-			setNewSheep();
+			setNewLamb();
 		}
 		
 		if (age >= 10 && Math.random() < 0.1666666) {
@@ -54,17 +54,17 @@ class Sheep extends Animal {
 	}
 		
 	// Adapted from Class Critter
-	public ArrayList<Location> getLocationsForNewSheep() {
+	public ArrayList<Location> getLocationsForNewLamb() {
 	       return getGrid().getEmptyAdjacentLocations(getLocation());
 	}
 	
-	void setNewSheep() {
-		if (getLocationsForNewSheep().isEmpty()){
+	void setNewLamb() {
+		if (getLocationsForNewLamb().isEmpty()){
 			return;
 		}	
-		Location newSheepPosition = getLocationsForNewSheep().get(0);
-		Sheep newSheep = new Sheep();
-		newSheep.putSelfInGrid(getGrid(), newSheepPosition);		
+		Location newLambPosition = getLocationsForNewLamb().get(0);
+		Lamb newLamb = new Lamb();
+		newLamb.putSelfInGrid(getGrid(), newLambPosition);		
 	}
 	
 	void getsSheared() {

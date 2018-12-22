@@ -12,7 +12,7 @@ import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
 /**
- * A <code>CreatorFarmer</code> is a Farmer adds a new Sheep if none are present, but does not collect flowers
+ * A <code>CreatorFarmer</code> is a Farmer adds a new Lamb if none are present, but does not collect flowers
  */
 
 class CreatorFarmer extends Farmer {
@@ -29,9 +29,9 @@ class CreatorFarmer extends Farmer {
         Location loc = selectMoveLocation(moveLocs);
         makeMove(loc);
         
-        // Adds new Sheep if none exist
+        // Adds new Lamb if none exist
         if (!existSheep()) {
-        	addSheep();          
+        	addLamb();          
         }
     }
 
@@ -49,12 +49,12 @@ class CreatorFarmer extends Farmer {
 	}
 
 	
-	protected void addSheep() {
+	protected void addLamb() {
 		Grid<Actor> grid = getGrid() ;
 		ArrayList<Location> sheepLocs = getMoveLocations();
 		Location newLoc = selectMoveLocation(sheepLocs);
-		Sheep newSheep = new Sheep();
-		newSheep.putSelfInGrid(grid, newLoc);
+		Lamb newLamb = new Lamb();
+		newLamb.putSelfInGrid(grid, newLoc);
 	}
 }
 
