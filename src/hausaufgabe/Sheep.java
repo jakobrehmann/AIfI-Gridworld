@@ -16,6 +16,7 @@ import gridworld.framework.grid.Location;
 class Sheep extends Animal {
 
 	private int lastTimeSheared;
+	private int excrementCounter;
 
 	public Sheep(int age) {
 		super(age);

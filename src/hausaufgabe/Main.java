@@ -13,6 +13,9 @@ public class Main {
 		world.setGrid(new BoundedGrid(20, 20));
 		world.add(new Sheep());
 		// world.add(new Werewolf());
+		world.add(new Bird());
+		world.add(new Excrement());
+		world.add(new Tractor());
 		world.show();
 
 	}
