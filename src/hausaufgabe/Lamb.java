@@ -16,7 +16,7 @@ import gridworld.framework.grid.Location;
  * <code>Sheep</code> at age 4.
  */
 
-class Lamb extends Animal {
+class Lamb extends Animal implements Eatable{
 
 	public Lamb() {
 
