@@ -8,15 +8,12 @@ import gridworld.framework.grid.BoundedGrid;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		
+
 		ActorWorld world = new ActorWorld();
 		world.setGrid(new BoundedGrid(20, 20));
-        world.add(new Sheep());
-        
-        world.show();
+		world.add(new Sheep());
+
+		world.show();
 	}
-	
 
 }
-
