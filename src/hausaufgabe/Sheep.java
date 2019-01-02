@@ -6,6 +6,7 @@
 
 package hausaufgabe;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import gridworld.framework.actor.Actor;
@@ -18,11 +19,13 @@ class Sheep extends Animal {
 
 	public Sheep(int age) {
 		super(age);
+		this.setColor(Color.GRAY);
 		// TODO Auto-generated constructor stub
 		lastTimeSheared = 7;
 	}
 
 	public Sheep() {
+		this.setColor(Color.GRAY);
 		// TODO Auto-generated constructor stub
 	}
 	
