@@ -52,7 +52,9 @@ class Sheep extends Animal {
 		this.removeSelfFromGrid();
 		
 		Flower flower = new Flower();
-		flower.putSelfInGrid(grid, loc);		
+		flower.setColor(Color.GRAY);
+		flower.putSelfInGrid(grid, loc);
+		
 		
 	}
 		

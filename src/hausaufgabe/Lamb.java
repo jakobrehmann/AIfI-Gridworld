@@ -5,6 +5,8 @@
 
 package hausaufgabe;
 
+import java.awt.Color;
+
 import gridworld.framework.actor.Actor;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
@@ -17,7 +19,9 @@ import gridworld.framework.grid.Location;
 class Lamb extends Animal {
 	
 	public Lamb() {
-		super() ;
+		
+		super();
+		this.setColor(Color.GRAY);
 	}
 	
 	public void act() {
