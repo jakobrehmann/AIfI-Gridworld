@@ -12,10 +12,11 @@ public class Main {
 		ActorWorld world = new ActorWorld();
 		world.setGrid(new BoundedGrid(20, 20));
 		world.add(new Sheep());
-		world.add(new Werewolf());
+		// world.add(new Werewolf());
 		world.show();
 
 	}
 
 }
+
 
