@@ -16,31 +16,54 @@ import gridworld.framework.grid.Location;
 final class Sheep extends Animal {
 
 	private int lastTimeSheared;
+	private int lastExcrement;
 
 	public Sheep(int age) {
+
 		super(age);
-		this.setColor(Color.GRAY);
-		// TODO Auto-generated constructor stub
+		lastExcrement = 0;
 		lastTimeSheared = 0;
+		setColor(Color.GRAY);
+
 	}
 
 	public Sheep() {
+
 		this(0);
-		// TODO Auto-generated constructor stub
+		lastExcrement = 0;
+
 	}
 
 	// Adapted from Class Animal
 	@Override
 	public void act() {
+		
+		Location loc_act = getLocation();
+		Grid<Actor> grid_act = getGrid();
+		
 		super.act();
 
 		if (Math.random() < 0.2) {
+
 			setNewLamb();
+
 		}
 
 		if (super.getAge() >= 10 && Math.random() < 0.1666666) {
+
 			dies();
+
 		}
+
+		if (lastExcrement > 10 && Math.random() > 0.5) {
+
+			Excrement excrement = new Excrement();
+			excrement.putSelfInGrid(grid_act, loc_act);
+			lastExcrement = 0;
+
+		}
+
+		lastExcrement++;
 	}
 
 	private void dies() {
@@ -67,13 +90,23 @@ final class Sheep extends Animal {
 		Lamb newLamb = new Lamb();
 		newLamb.putSelfInGrid(getGrid(), newLambPosition);
 	}
-	
+
 	boolean isShearable() {
 		if (super.getAge() - lastTimeSheared > 2) {
 			lastTimeSheared = 0;
 			return true;
-		}	
-		return false; 
+		}
+		return false;
 	}
+
+	/* private void shit() {
+
+		// Location loc = getLocation();
+		// Grid<Actor> grid = getGrid();
+		Excrement excrement = new Excrement();
+		excrement.putSelfInGrid(grid, loc);
+		lastExcrement = 0;
+
+	} */
 
 }
