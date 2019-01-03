@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;
 
-public class SheepShearer extends Farmer {
+final class SheepShearer extends Farmer {
 
 	private WoolStorage storage;
 
@@ -18,12 +18,12 @@ public class SheepShearer extends Farmer {
 	@Override
 	public void processActors(ArrayList<Actor> actors) {
 		for (Actor a : actors) {
-			if (a instanceof Flower)
+			if (a instanceof Flower) {
 				a.removeSelfFromGrid();
+			}	
 
 			else if (a instanceof Sheep) {
-				if (((Sheep) a).getLastTimeSheared() >= 3) {
-					((Sheep) a).getsSheared();
+				if (((Sheep) a).isShearable()) {
 					storage.putWool();
 				}
 			}

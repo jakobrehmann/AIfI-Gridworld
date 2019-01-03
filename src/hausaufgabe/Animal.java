@@ -17,7 +17,7 @@ import gridworld.framework.grid.Location;
  */
 
 class Animal extends Actor {
-	int age;
+	private int age;
 
 	public Animal(int age) {
 		this.age = age;
@@ -27,17 +27,18 @@ class Animal extends Actor {
 		this(0);
 	}
 
-	public int getAge() {
+	int getAge() {
 		return age;
 	}
 
 	// Adapted from Class Critter
 	@Override
 	public void act() {
-		if (getGrid() == null)
+		if (getGrid() == null) {
 			return;
+		}
+		
 		ArrayList<Location> moveLocs = getMoveLocations();
-
 		ArrayList<Location> herdLocs = getHerdLocations(moveLocs);
 
 		/*
@@ -54,17 +55,18 @@ class Animal extends Actor {
 		age++;
 	}
 
-	public ArrayList<Location> getMoveLocations() {
+	private ArrayList<Location> getMoveLocations() {
 		return getGrid().getEmptyAdjacentLocations(getLocation());
 	}
 
-	public ArrayList<Location> getHerdLocations(ArrayList<Location> locs) {
+	private ArrayList<Location> getHerdLocations(ArrayList<Location> locs) {
 		ArrayList<Location> herdLocs = new ArrayList<Location>();
 		Grid<Actor> gr = getGrid();
 
 		for (Location loc : locs) {
 			ArrayList<Location> neighborLocs = gr.getValidAdjacentLocations(loc);
 			neighborLocs.remove(getLocation()); // removes the Sheep who we are trying to move
+			
 			for (Location neighborLoc : neighborLocs) {
 				if ((gr.get(neighborLoc) instanceof Sheep) || (gr.get(neighborLoc) instanceof Lamb)) {
 					herdLocs.add(loc);
@@ -75,19 +77,22 @@ class Animal extends Actor {
 		return herdLocs;
 	}
 
-	public Location selectMoveLocation(ArrayList<Location> locs) {
+	private Location selectMoveLocation(ArrayList<Location> locs) {
 		int n = locs.size();
-		if (n == 0)
+		if (n == 0) {
 			return getLocation();
+		}	
 		int r = (int) (Math.random() * n);
 		return locs.get(r);
 	}
 
-	public void makeMove(Location loc) {
-		if (loc == null)
+	private void makeMove(Location loc) {
+		if (loc == null) {
 			removeSelfFromGrid();
-		else
+		}	
+		else {
 			moveTo(loc);
+		}	
 	}
 
 	@Override

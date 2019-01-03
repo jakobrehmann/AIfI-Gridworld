@@ -5,7 +5,7 @@ import gridworld.framework.actor.Actor;
  * Singleton Design Pattern
  */
 
-final public class WoolStorage extends Actor {
+final class WoolStorage extends Actor {
 
 	private int amountOfWool;
 	private static WoolStorage instance;
@@ -18,11 +18,11 @@ final public class WoolStorage extends Actor {
 		instance = new WoolStorage();
 	}
 
-	public static WoolStorage getInstance() {
+	static WoolStorage getInstance() {
 		return instance;
 	}
 
-	public void putWool() {
+	void putWool() {
 		amountOfWool++;
 	}
 

@@ -1,5 +1,5 @@
 /* 
- * Problem 1.2 - Schaf
+ * Problem 1.2 - Sheep
  * @author Marcel
  */
 
@@ -13,20 +13,19 @@ import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
-class Sheep extends Animal {
+final class Sheep extends Animal {
 
 	private int lastTimeSheared;
-	private int excrementCounter;
 
 	public Sheep(int age) {
 		super(age);
 		this.setColor(Color.GRAY);
 		// TODO Auto-generated constructor stub
-		lastTimeSheared = 7;
+		lastTimeSheared = 0;
 	}
 
 	public Sheep() {
-		this.setColor(Color.GRAY);
+		this(0);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -39,14 +38,12 @@ class Sheep extends Animal {
 			setNewLamb();
 		}
 
-		if (age >= 10 && Math.random() < 0.1666666) {
+		if (super.getAge() >= 10 && Math.random() < 0.1666666) {
 			dies();
 		}
-		lastTimeSheared++;
-
 	}
 
-	void dies() {
+	private void dies() {
 
 		Location loc = getLocation();
 		Grid<Actor> grid = getGrid();
@@ -58,11 +55,11 @@ class Sheep extends Animal {
 	}
 
 	// Adapted from Class Critter
-	public ArrayList<Location> getLocationsForNewLamb() {
+	private ArrayList<Location> getLocationsForNewLamb() {
 		return getGrid().getEmptyAdjacentLocations(getLocation());
 	}
 
-	void setNewLamb() {
+	private void setNewLamb() {
 		if (getLocationsForNewLamb().isEmpty()) {
 			return;
 		}
@@ -70,13 +67,13 @@ class Sheep extends Animal {
 		Lamb newLamb = new Lamb();
 		newLamb.putSelfInGrid(getGrid(), newLambPosition);
 	}
-
-	void getsSheared() {
-		lastTimeSheared = 0;
-	}
-
-	int getLastTimeSheared() {
-		return lastTimeSheared;
+	
+	boolean isShearable() {
+		if (super.getAge() - lastTimeSheared > 2) {
+			lastTimeSheared = 0;
+			return true;
+		}	
+		return false; 
 	}
 
 }

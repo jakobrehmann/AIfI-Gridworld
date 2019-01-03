@@ -2,7 +2,7 @@ package hausaufgabe;
 
 import java.awt.Color;
 
-public class Werewolf extends Farmer implements Eatable {
+public class Werewolf extends Farmer{
 
 	public Werewolf() {
 		

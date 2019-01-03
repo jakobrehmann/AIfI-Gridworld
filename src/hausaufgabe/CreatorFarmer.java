@@ -16,7 +16,7 @@ import gridworld.framework.grid.Location;
  * but does not collect flowers
  */
 
-class CreatorFarmer extends Farmer {
+final class CreatorFarmer extends Farmer {
 
 	public CreatorFarmer() {
 	}
@@ -24,8 +24,9 @@ class CreatorFarmer extends Farmer {
 	@Override
 	public void act() {
 		// Move Randomly
-		if (getGrid() == null)
+		if (getGrid() == null) {
 			return;
+		}	
 		ArrayList<Location> moveLocs = getMoveLocations();
 		Location loc = selectMoveLocation(moveLocs);
 		makeMove(loc);
@@ -37,19 +38,23 @@ class CreatorFarmer extends Farmer {
 	}
 
 	// adapted from getOccupiedLocations() in BoundedGrid.java
-	public boolean existSheep() {
+	private boolean existSheep() {
 		Grid<Actor> grid = getGrid();
+		
 		for (int r = 0; r < grid.getNumRows(); r++) {
+			
 			for (int c = 0; c < grid.getNumCols(); c++) {
 				Location loc = new Location(r, c);
-				if (grid.get(loc) instanceof Sheep)
+				
+				if (grid.get(loc) instanceof Sheep) {
 					return true;
+				}	
 			}
 		}
 		return false;
 	}
 
-	protected void addLamb() {
+	private void addLamb() {
 		Grid<Actor> grid = getGrid();
 		ArrayList<Location> sheepLocs = getMoveLocations();
 		Location newLoc = selectMoveLocation(sheepLocs);

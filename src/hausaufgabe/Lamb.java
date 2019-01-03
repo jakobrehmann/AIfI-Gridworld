@@ -16,7 +16,7 @@ import gridworld.framework.grid.Location;
  * <code>Sheep</code> at age 4.
  */
 
-class Lamb extends Animal implements Eatable{
+final class Lamb extends Animal implements Eatable{
 
 	public Lamb() {
 
@@ -24,10 +24,11 @@ class Lamb extends Animal implements Eatable{
 		this.setColor(Color.GRAY);
 	}
 
+	@Override
 	public void act() {
 		super.act();
 
-		if (this.age == 4) {
+		if (super.getAge() == 4) {
 			Location loc = getLocation();
 			Grid<Actor> gr = getGrid();
 			this.removeSelfFromGrid();
