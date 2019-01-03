@@ -5,6 +5,7 @@
 
 package hausaufgabe;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Critter;
@@ -19,6 +20,7 @@ class Farmer extends Critter {
 
 	public Farmer() {
 		super();
+		setColor(Color.GRAY);
 	}
 
 	@Override
