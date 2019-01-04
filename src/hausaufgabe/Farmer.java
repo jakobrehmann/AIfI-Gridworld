@@ -19,16 +19,25 @@ import gridworld.framework.actor.Flower;
 class Farmer extends Critter {
 
 	public Farmer() {
+
 		super();
 		setColor(Color.GRAY);
+
 	}
 
 	@Override
 	public void processActors(ArrayList<Actor> actors) {
+
 		for (Actor a : actors) {
-			if (a instanceof Flower)
+
+			if (a instanceof Flower) {
+
 				a.removeSelfFromGrid();
+
+			}
+
 		}
+
 	}
 
 }

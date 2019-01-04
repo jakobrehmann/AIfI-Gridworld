@@ -1,109 +1,168 @@
 package hausaufgabe;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;
-import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
 public class Tractor extends Farmer {
 
-	public Tractor() {
+	private ExcrementStorage storage;
+	private int ExcCounter;
+	private Location locBiogas;
 
+	public Tractor(ExcrementStorage storage, Location locBiogas) {
+
+		super();
+		this.setStorage(storage);
 		this.setColor(Color.RED);
+		this.locBiogas = locBiogas;
 
 	}
+	
+	/* public Tractor(ExcrementStorage storage) {
 
-	public void act() {
+		super();
+		this.setStorage(storage);
+		this.setColor(Color.RED);
+		
 
-		if (canMove()) {
+	} */
 
-			if (Math.random() < 0.6) {
+	@Override
+	public void processActors(ArrayList<Actor> actors) {
+		
+		// System.out.println(locBiogas);
 
-				move();
+		if (ExcCounter < 5) {
 
-			} else if (Math.random() < 0.5) {
+			for (Actor a : actors) {
+				if (a instanceof Flower) {
+					a.removeSelfFromGrid();
+				}
 
-				turn_right();
+				else if (a instanceof Excrement) {
 
-			} else {
+					storage.putExcrement();
+					a.removeSelfFromGrid();
+					ExcCounter++;
+					System.out.println("Bisher so viel: " + ExcCounter);
 
-				turn_left();
+				}
 
 			}
 
 		} else {
-
-			turn_right();
+			
+			// muss zur Biogasanlage
+			
+			moveTo(locBiogas);
+			
 
 		}
+	}
+
+	/*
+	 * public void act() {
+	 * 
+	 * if (canMove()) {
+	 * 
+	 * if (Math.random() < 0.6) {
+	 * 
+	 * move();
+	 * 
+	 * } else if (Math.random() < 0.5) {
+	 * 
+	 * turn_right();
+	 * 
+	 * } else {
+	 * 
+	 * turn_left();
+	 * 
+	 * }
+	 * 
+	 * } else {
+	 * 
+	 * turn_right();
+	 * 
+	 * }
+	 * 
+	 * }
+	 * 
+	 * public void turn_right() {
+	 * 
+	 * setDirection(getDirection() + Location.HALF_RIGHT);
+	 * 
+	 * }
+	 * 
+	 * public void turn_left() {
+	 * 
+	 * setDirection(getDirection() + Location.HALF_LEFT);
+	 * 
+	 * }
+	 * 
+	 * public void move() {
+	 * 
+	 * Grid<Actor> gr = getGrid();
+	 * 
+	 * if (gr == null) {
+	 * 
+	 * return;
+	 * 
+	 * }
+	 * 
+	 * Location loc = getLocation(); Location next =
+	 * loc.getAdjacentLocation(getDirection());
+	 * 
+	 * if (gr.isValid(next)) {
+	 * 
+	 * moveTo(next);
+	 * 
+	 * } else {
+	 * 
+	 * removeSelfFromGrid();
+	 * 
+	 * }
+	 * 
+	 * }
+	 * 
+	 * public boolean canMove() {
+	 * 
+	 * Grid<Actor> gr = getGrid();
+	 * 
+	 * if (gr == null) {
+	 * 
+	 * return false;
+	 * 
+	 * }
+	 * 
+	 * Location loc = getLocation(); Location next =
+	 * loc.getAdjacentLocation(getDirection());
+	 * 
+	 * if (!gr.isValid(next)) {
+	 * 
+	 * return false;
+	 * 
+	 * }
+	 * 
+	 * Actor neighbor = gr.get(next); return (neighbor == null) || (neighbor
+	 * instanceof Flower) || (neighbor instanceof Excrement);
+	 * 
+	 * }
+	 */
+
+	public ExcrementStorage getStorage() {
+
+		return storage;
 
 	}
 
-	public void turn_right() {
+	public void setStorage(ExcrementStorage storage) {
 
-		setDirection(getDirection() + Location.HALF_RIGHT);
+		this.storage = storage;
 
-	}
-
-	public void turn_left() {
-
-		setDirection(getDirection() + Location.HALF_LEFT);
-
-	}
-
-	public void move() {
-
-		Grid<Actor> gr = getGrid();
-
-		if (gr == null) {
-
-			return;
-
-		}
-
-		Location loc = getLocation();
-		Location next = loc.getAdjacentLocation(getDirection());
-
-		if (gr.isValid(next)) {
-
-			moveTo(next);
-
-		} else {
-
-			removeSelfFromGrid();
-
-		}
-
-		// Flower flower = new Flower(getColor());
-		// flower.putSelfInGrid(gr, loc);
-
-	}
-
-	public boolean canMove() {
-
-		Grid<Actor> gr = getGrid();
-
-		if (gr == null) {
-
-			return false;
-
-		}
-
-		Location loc = getLocation();
-		Location next = loc.getAdjacentLocation(getDirection());
-
-		if (!gr.isValid(next)) {
-
-			return false;
-
-		}
-
-		Actor neighbor = gr.get(next);
-		return (neighbor == null) || (neighbor instanceof Flower) || (neighbor instanceof Excrement);
-		// ok to move into empty location or onto flower
-		// not ok to move onto any other actor
 	}
 
 }
