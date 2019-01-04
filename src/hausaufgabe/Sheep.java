@@ -13,7 +13,7 @@ import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
-final class Sheep extends Animal {
+class Sheep extends Animal { // Jakob - removed final, so LeadSheep can extend
 
 	private int lastTimeSheared;
 	private int lastExcrement;
@@ -62,6 +62,15 @@ final class Sheep extends Animal {
 			lastExcrement = 0;
 
 		}
+		
+		// Lead Sheep Generation
+		
+		if (!existLead()) { //if existLead is false, this happens
+			LeadSheep ls = new LeadSheep(grid_act) ;
+			
+		}
+		
+		
 
 		lastExcrement++;
 	}
@@ -79,7 +88,10 @@ final class Sheep extends Animal {
 
 	// Adapted from Class Critter
 	private ArrayList<Location> getLocationsForNewLamb() {
-		return getGrid().getEmptyAdjacentLocations(getLocation());
+		Grid<Actor> grid = getGrid();
+		if (grid == null)
+			return null ;
+		return grid.getEmptyAdjacentLocations(getLocation());
 	}
 
 	private void setNewLamb() {
@@ -98,6 +110,23 @@ final class Sheep extends Animal {
 		}
 		return false;
 	}
+	
+	
+    private boolean existLead() {
+        Grid<Actor> gr = getGrid();
+        
+        ArrayList<Location> locs ;
+        if (gr == null)
+            return true;
+        
+        locs = gr.getOccupiedLocations(); 
+        
+        for (Location loc : locs) {
+        	if (gr.get(loc) instanceof LeadSheep)
+        		return true ;
+        }
+        return false ;
+    }
 
 	/* private void shit() {
 

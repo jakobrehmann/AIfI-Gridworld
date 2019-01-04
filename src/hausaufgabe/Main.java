@@ -15,9 +15,13 @@ public class Main {
 		// world.add(new Werewolf());
 		// world.add(new Bird());
 		// world.add(new Excrement());
-		world.add(new Tractor());
+		//world.add(new Tractor());
+		//world.add(new Farmer());
 		world.add(new Farmer());
-		world.add(new Farmer());
+
+		
+		
+		
 		world.show();
 
 	}

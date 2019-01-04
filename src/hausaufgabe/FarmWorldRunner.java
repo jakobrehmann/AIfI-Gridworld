@@ -17,7 +17,9 @@ public class FarmWorldRunner {
 		
 		
 		ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(20, 20));
+		world.add(new Sheep());
 		world.add(new Lamb());
+		world.add(new Sheep());
 //		world.add(new CreatorFarmer());
 		WoolStorage storage = WoolStorage.getInstance();
 		world.add(storage);
@@ -27,9 +29,10 @@ public class FarmWorldRunner {
 		world.add(storage2);
 		Location locBiogas = storage2.getLocation();
 
-		world.add(new SheepShearer(storage));
-		world.add(new SheepShearer(storage));
-		world.add(new Tractor(storage2, locBiogas));
+//		world.add(new SheepShearer(storage));
+//		world.add(new SheepShearer(storage));
+//		world.add(new Farmer());
+//		world.add(new Tractor(storage2, locBiogas));
 		
 		System.out.println(locBiogas);
 		
