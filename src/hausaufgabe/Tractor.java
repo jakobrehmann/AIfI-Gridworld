@@ -71,7 +71,7 @@ public class Tractor extends Farmer {
 
 		}
 		
-		// System.out.println("Bisher so viel: " + ExcCounter);
+		// System.out.println("Bisher so viel: " + ExcCounter);;
 		
 	}
 
