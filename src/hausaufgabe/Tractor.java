@@ -21,19 +21,19 @@ public class Tractor extends Farmer {
 		this.locBiogas = locBiogas;
 
 	}
-	
-	/* public Tractor(ExcrementStorage storage) {
 
-		super();
-		this.setStorage(storage);
-		this.setColor(Color.RED);
-		
-
-	} */
+	/*
+	 * public Tractor(ExcrementStorage storage) {
+	 * 
+	 * super(); this.setStorage(storage); this.setColor(Color.RED);
+	 * 
+	 * 
+	 * }
+	 */
 
 	@Override
 	public void processActors(ArrayList<Actor> actors) {
-		
+
 		// System.out.println(locBiogas);
 
 		if (ExcCounter < 5) {
@@ -48,20 +48,31 @@ public class Tractor extends Farmer {
 					storage.putExcrement();
 					a.removeSelfFromGrid();
 					ExcCounter++;
-					System.out.println("Bisher so viel: " + ExcCounter);
+					
 
 				}
 
 			}
 
 		} else {
-			
-			// muss zur Biogasanlage
-			
-			moveTo(locBiogas);
-			
+
+			Location locTemp = getLocation();
+
+			if (locTemp == locBiogas) {
+				
+				ExcCounter = 0;
+				System.out.println("ich bin hier");
+
+			} else {
+
+				moveTo(locBiogas);
+
+			}
 
 		}
+		
+		// System.out.println("Bisher so viel: " + ExcCounter);
+		
 	}
 
 	/*
