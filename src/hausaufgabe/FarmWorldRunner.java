@@ -11,11 +11,7 @@ import gridworld.framework.grid.Location;
 public class FarmWorldRunner {
 
 	public static void main(String[] args) {
-		
-		
-		
-		
-		
+
 		ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(20, 20));
 		world.add(new Sheep());
 		world.add(new Lamb());
@@ -25,21 +21,19 @@ public class FarmWorldRunner {
 		world.add(storage);
 
 		ExcrementStorage storage2 = ExcrementStorage.getInstance();
-		
+
 		world.add(storage2);
 		Location locBiogas = storage2.getLocation();
 
 //		world.add(new SheepShearer(storage));
 //		world.add(new SheepShearer(storage));
 //		world.add(new Farmer());
-//		world.add(new Tractor(storage2, locBiogas));
-		
-		System.out.println(locBiogas);
-		
-		
+		world.add(new Tractor(storage2, locBiogas));
+
+//		System.out.println(locBiogas);
+
 //		world.add(new Farmer());
 
 		world.show();
 	}
 }
-

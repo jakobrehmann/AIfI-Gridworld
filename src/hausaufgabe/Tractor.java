@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;
+import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
 public class Tractor extends Farmer {
@@ -12,6 +13,7 @@ public class Tractor extends Farmer {
 	private ExcrementStorage storage;
 	private int ExcCounter;
 	private Location locBiogas;
+	private int Temp1;
 
 	public Tractor(ExcrementStorage storage, Location locBiogas) {
 
@@ -35,12 +37,27 @@ public class Tractor extends Farmer {
 	public void processActors(ArrayList<Actor> actors) {
 
 		// System.out.println(locBiogas);
+		
+		if (Temp1 == 1) {
+			
+			ExcrementStorage storage2 = ExcrementStorage.getInstance();
+			Grid<Actor> grid = getGrid();
+			storage2.putSelfInGrid(grid, locBiogas);
+			// world.add()
+			// world.add(storage2);
+			Temp1 = 0;
+			
+		}
 
 		if (ExcCounter < 5) {
 
 			for (Actor a : actors) {
+				
 				if (a instanceof Flower) {
+					
 					a.removeSelfFromGrid();
+					System.out.println("Blume gesammelt");
+					
 				}
 
 				else if (a instanceof Excrement) {
@@ -62,6 +79,7 @@ public class Tractor extends Farmer {
 				
 				ExcCounter = 0;
 				System.out.println("ich bin hier");
+				Temp1 = 1;
 
 			} else {
 
