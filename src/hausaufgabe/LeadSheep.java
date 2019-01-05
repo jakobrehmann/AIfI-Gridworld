@@ -36,6 +36,7 @@ public class LeadSheep extends Sheep {
         			max_loc = loc ;	
         		}
         	}
+        	
         }
 		return max_loc;
 	}

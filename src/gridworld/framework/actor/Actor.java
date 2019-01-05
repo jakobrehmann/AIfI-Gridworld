@@ -146,6 +146,7 @@ public class Actor
     }
 
     /**
+     * 
      * Moves this actor to a new location. If there is another actor at the
      * given location, it is removed. <br />
      * Precondition: (1) This actor is contained in a grid (2)

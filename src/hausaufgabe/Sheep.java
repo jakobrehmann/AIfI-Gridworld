@@ -42,6 +42,12 @@ class Sheep extends Animal { // Jakob - removed final, so LeadSheep can extend
 		Grid<Actor> grid_act = getGrid();
 		
 		super.act();
+		
+		// Because super.act() includes a method (makeMove) which also removes the sheep, this method 
+		// needs a control condition.
+		if (getGrid() == null) {
+			return;
+		}
 
 		if (Math.random() < 0.2) {
 
@@ -79,11 +85,11 @@ class Sheep extends Animal { // Jakob - removed final, so LeadSheep can extend
 
 		Location loc = getLocation();
 		Grid<Actor> grid = getGrid();
-		this.removeSelfFromGrid();
+		removeSelfFromGrid();	
 
 		Flower flower = new Flower(Color.GREEN);
 		flower.putSelfInGrid(grid, loc);
-
+		
 	}
 
 	// Adapted from Class Critter
@@ -95,7 +101,7 @@ class Sheep extends Animal { // Jakob - removed final, so LeadSheep can extend
 	}
 
 	private void setNewLamb() {
-		if (getLocationsForNewLamb().isEmpty()) {
+		if (getLocationsForNewLamb() == null) {
 			return;
 		}
 		Location newLambPosition = getLocationsForNewLamb().get(0);
