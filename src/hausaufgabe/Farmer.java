@@ -39,5 +39,10 @@ class Farmer extends Critter {
 		}
 
 	}
+	
+	public String toString()
+    {
+        return getClass().getSimpleName() ;
+    }
 
 }

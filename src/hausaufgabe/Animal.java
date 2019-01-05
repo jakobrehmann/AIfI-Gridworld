@@ -141,6 +141,6 @@ class Animal extends Actor {
 
 	@Override
 	public String toString() {
-		return getClass().getName() + "[age=" + age + " years]";
+		return getClass().getSimpleName() + " [age = " + age + " years]";
 	}
 }

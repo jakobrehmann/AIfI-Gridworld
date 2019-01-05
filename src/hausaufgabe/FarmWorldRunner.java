@@ -16,6 +16,7 @@ public class FarmWorldRunner {
 		world.add(new Sheep());
 		world.add(new Lamb());
 		world.add(new Sheep());
+		world.add(new Werewolf());
 //		world.add(new CreatorFarmer());
 		WoolStorage storage = WoolStorage.getInstance();
 		world.add(storage);
