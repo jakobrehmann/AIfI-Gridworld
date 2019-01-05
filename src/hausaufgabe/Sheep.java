@@ -101,7 +101,7 @@ class Sheep extends Animal { // Jakob - removed final, so LeadSheep can extend
 	}
 
 	private void setNewLamb() {
-		if (getLocationsForNewLamb() == null) {
+		if (getLocationsForNewLamb() == null || getLocationsForNewLamb().isEmpty()) {
 			return;
 		}
 		Location newLambPosition = getLocationsForNewLamb().get(0);
