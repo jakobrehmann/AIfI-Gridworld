@@ -1,5 +1,6 @@
 package hausaufgabe;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import gridworld.framework.actor.Actor;
@@ -10,9 +11,9 @@ final class SheepShearer extends Farmer {
 	private WoolStorage storage;
 
 	public SheepShearer(WoolStorage storage) {
-		// TODO Auto-generated constructor stub
 		super();
 		this.storage = storage;
+		this.setColor(Color.BLUE);
 	}
 
 	@Override
@@ -25,9 +26,9 @@ final class SheepShearer extends Farmer {
 			else if (a instanceof Sheep) {
 				if (((Sheep) a).isShearable()) {
 					storage.putWool();
+					((Sheep) a).setTimeSinceShear(0);
 				}
 			}
 		}
 	}
-
 }

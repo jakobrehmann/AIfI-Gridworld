@@ -13,25 +13,26 @@ import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
-class Sheep extends Animal { // Jakob - removed final, so LeadSheep can extend
+class Sheep extends Animal { 
 
-	private int lastTimeSheared;
+	private int timeSinceShear;
 	private int lastExcrement;
 
 	public Sheep(int age) {
 
 		super(age);
 		lastExcrement = 0;
-		lastTimeSheared = 0;
+		timeSinceShear = 3;
 		setColor(Color.GRAY);
 
 	}
 
 	public Sheep() {
-
 		this(0);
-		lastExcrement = 0;
-
+	}
+	
+	public void setTimeSinceShear(int timeSinceShear) {
+		this.timeSinceShear = timeSinceShear;
 	}
 
 	// Adapted from Class Animal
@@ -48,19 +49,22 @@ class Sheep extends Animal { // Jakob - removed final, so LeadSheep can extend
 		if (getGrid() == null) {
 			return;
 		}
-
+		
+		// Generate New Lamb
 		if (Math.random() < 0.2) {
 
 			setNewLamb();
-
+			
 		}
 
+		// Death of Sheep
 		if (super.getAge() >= 10 && Math.random() < 0.1666666) {
 
 			dies();
 
 		}
 
+		// Generate Excrement 
 		if (lastExcrement > 10 && Math.random() > 0.5) {
 
 			Excrement excrement = new Excrement();
@@ -69,16 +73,14 @@ class Sheep extends Animal { // Jakob - removed final, so LeadSheep can extend
 
 		}
 		
-		// Lead Sheep Generation
-		
-		if (!existLead()) { //if existLead is false, this happens
-			LeadSheep ls = new LeadSheep(grid_act) ;
+		// Generate Lead Sheep, if none exists		
+		if (!existLead()) {
+			new LeadSheep(grid_act) ;
 			
-		}
-		
-		
+		}	
 
-		lastExcrement++;
+		lastExcrement ++ ;
+		timeSinceShear ++ ;
 	}
 
 	private void dies() {
@@ -110,8 +112,7 @@ class Sheep extends Animal { // Jakob - removed final, so LeadSheep can extend
 	}
 
 	boolean isShearable() {
-		if (super.getAge() - lastTimeSheared > 2) {
-			lastTimeSheared = 0;
+		if (timeSinceShear > 2) {
 			return true;
 		}
 		return false;
@@ -133,15 +134,10 @@ class Sheep extends Animal { // Jakob - removed final, so LeadSheep can extend
         }
         return false ;
     }
-
-	/* private void shit() {
-
-		// Location loc = getLocation();
-		// Grid<Actor> grid = getGrid();
-		Excrement excrement = new Excrement();
-		excrement.putSelfInGrid(grid, loc);
-		lastExcrement = 0;
-
-	} */
+    
+    @Override
+    public String toString() {
+		return getClass().getSimpleName() + " [age = " + getAge() + " years, Shearable?: " + isShearable() + "]";
+	}
 
 }

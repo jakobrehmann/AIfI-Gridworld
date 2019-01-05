@@ -5,6 +5,7 @@
 
 package hausaufgabe;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import gridworld.framework.actor.Actor;
@@ -19,6 +20,7 @@ import gridworld.framework.grid.Location;
 final class CreatorFarmer extends Farmer {
 
 	public CreatorFarmer() {
+		this.setColor(Color.YELLOW);
 	}
 
 	@Override
@@ -46,7 +48,7 @@ final class CreatorFarmer extends Farmer {
 			for (int c = 0; c < grid.getNumCols(); c++) {
 				Location loc = new Location(r, c);
 				
-				if (grid.get(loc) instanceof Sheep) {
+				if (grid.get(loc) instanceof Sheep || grid.get(loc) instanceof Lamb) {
 					return true;
 				}	
 			}
