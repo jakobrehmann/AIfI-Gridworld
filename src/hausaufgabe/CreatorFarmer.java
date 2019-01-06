@@ -28,7 +28,7 @@ final class CreatorFarmer extends Farmer {
 		// Move Randomly
 		if (getGrid() == null) {
 			return;
-		}	
+		}
 		ArrayList<Location> moveLocs = getMoveLocations();
 		Location loc = selectMoveLocation(moveLocs);
 		makeMove(loc);
@@ -42,15 +42,15 @@ final class CreatorFarmer extends Farmer {
 	// adapted from getOccupiedLocations() in BoundedGrid.java
 	private boolean existSheep() {
 		Grid<Actor> grid = getGrid();
-		
+
 		for (int r = 0; r < grid.getNumRows(); r++) {
-			
+
 			for (int c = 0; c < grid.getNumCols(); c++) {
 				Location loc = new Location(r, c);
-				
+
 				if (grid.get(loc) instanceof Sheep || grid.get(loc) instanceof Lamb) {
 					return true;
-				}	
+				}
 			}
 		}
 		return false;
@@ -62,5 +62,8 @@ final class CreatorFarmer extends Farmer {
 		Location newLoc = selectMoveLocation(sheepLocs);
 		Lamb newLamb = new Lamb();
 		newLamb.putSelfInGrid(grid, newLoc);
+
+		// System.out.println("Ein neues Schaf!");
+
 	}
 }
