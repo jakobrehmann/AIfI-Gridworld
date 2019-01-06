@@ -14,6 +14,7 @@ public class Tractor extends Farmer {
 	private int ExcCounter;
 	private Location locBiogas;
 	private int Temp1;
+	private int Temp2;
 
 	public Tractor(ExcrementStorage storage, Location locBiogas) {
 
@@ -21,51 +22,53 @@ public class Tractor extends Farmer {
 		this.setStorage(storage);
 		this.setColor(Color.RED);
 		this.locBiogas = locBiogas;
+		this.Temp1 = 0;
+		this.Temp2 = 0;
 
 	}
 
-	/*
-	 * public Tractor(ExcrementStorage storage) {
-	 * 
-	 * super(); this.setStorage(storage); this.setColor(Color.RED);
-	 * 
-	 * 
-	 * }
-	 */
-
 	@Override
 	public void processActors(ArrayList<Actor> actors) {
-
-		// System.out.println(locBiogas);
 		
-		if (Temp1 == 1) {
+		System.out.println(Temp1);
+		
+		if (Temp2 == 1) {
 			
-			ExcrementStorage storage2 = ExcrementStorage.getInstance();
+			ExcrementStorage excrementStorage = ExcrementStorage.getInstance();
 			Grid<Actor> grid = getGrid();
-			storage2.putSelfInGrid(grid, locBiogas);
-			// world.add()
-			// world.add(storage2);
-			Temp1 = 0;
+			excrementStorage.putSelfInGrid(grid, locBiogas);
+			this.storage = excrementStorage;
+			ExcrementStorage.amountOfExcrement = 0;
+			Temp2 = 0;
 			
 		}
 
-		if (ExcCounter < 5) {
+		if (Temp1 != 1) {
 
 			for (Actor a : actors) {
-				
+
 				if (a instanceof Flower) {
-					
+
 					a.removeSelfFromGrid();
-					System.out.println("Blume gesammelt");
-					
+					// System.out.println("Blume gesammelt");
+
 				}
 
 				else if (a instanceof Excrement) {
 
-					storage.putExcrement();
-					a.removeSelfFromGrid();
-					ExcCounter++;
-					
+					if (Temp1 == 0) {
+
+						storage.putExcrement();
+						a.removeSelfFromGrid();
+						ExcCounter++;
+
+						if (ExcCounter == 5) {
+
+							Temp1 = 1;
+
+						}
+
+					}
 
 				}
 
@@ -73,114 +76,40 @@ public class Tractor extends Farmer {
 
 		} else {
 
-			Location locTemp = getLocation();
+			// muss zur anlage
 
-			if (locTemp == locBiogas) {
-				
-				ExcCounter = 0;
-				System.out.println("ich bin hier");
-				Temp1 = 1;
+			for (Actor a : actors) {
 
-			} else {
+				if (a instanceof Flower) {
 
-				moveTo(locBiogas);
+					a.removeSelfFromGrid();
+					// System.out.println("Blume gesammelt");
+
+				}
+
+			}
+
+			
+			ExcCounter = 0;
+
+			int TempLoc = getLocation().getDirectionToward(locBiogas);
+			Location nextLoc = getLocation().getAdjacentLocation(TempLoc);
+			moveTo(nextLoc);
+
+			Location TempLoc2 = getLocation();
+
+			if (TempLoc2.hashCode() == locBiogas.hashCode()) {
+
+				Temp1 = 0;
+				Temp2 = 1;
 
 			}
 
 		}
-		
-		// System.out.println("Bisher so viel: " + ExcCounter);;
-		
-	}
 
-	/*
-	 * public void act() {
-	 * 
-	 * if (canMove()) {
-	 * 
-	 * if (Math.random() < 0.6) {
-	 * 
-	 * move();
-	 * 
-	 * } else if (Math.random() < 0.5) {
-	 * 
-	 * turn_right();
-	 * 
-	 * } else {
-	 * 
-	 * turn_left();
-	 * 
-	 * }
-	 * 
-	 * } else {
-	 * 
-	 * turn_right();
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 * public void turn_right() {
-	 * 
-	 * setDirection(getDirection() + Location.HALF_RIGHT);
-	 * 
-	 * }
-	 * 
-	 * public void turn_left() {
-	 * 
-	 * setDirection(getDirection() + Location.HALF_LEFT);
-	 * 
-	 * }
-	 * 
-	 * public void move() {
-	 * 
-	 * Grid<Actor> gr = getGrid();
-	 * 
-	 * if (gr == null) {
-	 * 
-	 * return;
-	 * 
-	 * }
-	 * 
-	 * Location loc = getLocation(); Location next =
-	 * loc.getAdjacentLocation(getDirection());
-	 * 
-	 * if (gr.isValid(next)) {
-	 * 
-	 * moveTo(next);
-	 * 
-	 * } else {
-	 * 
-	 * removeSelfFromGrid();
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 * public boolean canMove() {
-	 * 
-	 * Grid<Actor> gr = getGrid();
-	 * 
-	 * if (gr == null) {
-	 * 
-	 * return false;
-	 * 
-	 * }
-	 * 
-	 * Location loc = getLocation(); Location next =
-	 * loc.getAdjacentLocation(getDirection());
-	 * 
-	 * if (!gr.isValid(next)) {
-	 * 
-	 * return false;
-	 * 
-	 * }
-	 * 
-	 * Actor neighbor = gr.get(next); return (neighbor == null) || (neighbor
-	 * instanceof Flower) || (neighbor instanceof Excrement);
-	 * 
-	 * }
-	 */
+		// System.out.println(ExcrementStorage.amountOfExcrement);
+
+	}
 
 	public ExcrementStorage getStorage() {
 

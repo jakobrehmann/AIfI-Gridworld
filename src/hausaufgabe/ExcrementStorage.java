@@ -1,14 +1,17 @@
 package hausaufgabe;
 
+import java.awt.Color;
+
 import gridworld.framework.actor.Actor;
 
 final class ExcrementStorage extends Actor {
 
-	private int amountOfExcrement;
+	static int amountOfExcrement;
 	private static ExcrementStorage instance;
 
 	private ExcrementStorage() {
 		amountOfExcrement = 0;
+		setColor(Color.ORANGE);
 	}
 
 	static {
