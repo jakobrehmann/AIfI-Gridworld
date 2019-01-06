@@ -44,8 +44,8 @@ class Animal extends Actor {
 		
 		ArrayList<Location> moveLocs = getMoveLocations();
 		ArrayList<Location> herdLocs = getHerdLocations(moveLocs);
-		Location lead = findLead() ;
-		Location loc = null ;
+		Location lead = findLead();
+		Location loc = null;
 
 		/*
 		 * Herd Behavior : if Sheep/Lambs are nearby, only those move locations are

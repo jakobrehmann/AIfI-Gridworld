@@ -1,0 +1,5 @@
+package hausaufgabe;
+
+interface TerrifyinglyHuge {
+
+}
