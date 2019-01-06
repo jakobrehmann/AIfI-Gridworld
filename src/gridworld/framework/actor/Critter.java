@@ -108,6 +108,7 @@ public class Critter extends Actor
             return getLocation();
         int r = (int) (Math.random() * n);
         return locs.get(r);
+        
     }
 
     /**
