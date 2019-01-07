@@ -18,7 +18,7 @@ import gridworld.framework.grid.Location;
  * or moves randomly if no Lamb is located nearby.
  */
 
-public class Werewolf extends Farmer{
+final class Werewolf extends Farmer{
 
 	public Werewolf() {
 		
@@ -28,13 +28,14 @@ public class Werewolf extends Farmer{
 	
 	@Override
 	public void act() {
+		
         if (getGrid() == null)
             return;
-//        ArrayList<Actor> actors = getActors(); // Not neccessary.
-//        processActors(actors);
+        
         ArrayList<Location> moveLocs = getMoveLocations();
         Location loc = selectMoveLocation(moveLocs);
         makeMove(loc);	
+        
 	}
 
 	@Override

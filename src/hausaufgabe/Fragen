@@ -1,3 +1,13 @@
-Sollen die Farmer sterben?
+Farmer sind von Typ Critter, die automatisch sterben wenn sie nicht sich bewegen koennen. Sollen die Farmer auch sterben?
 Was heißt ein Feld dazwischen beim Werwolf?
 Kommentare auf englishc und deutsch?
+WoolStorage disappears when number gets too high. 
+Soll Bird immer unten Rechts enden
+Static vs NonStatic
+Soll "Instance" benutzt werden fuer Storages (Singleton Pattern)
+If Runner extends RunnerInterface, should we fill in all the methods. 
+
+
+Tasks
+Comment all Classes
+

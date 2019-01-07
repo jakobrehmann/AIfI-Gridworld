@@ -8,7 +8,7 @@ import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
-public class Tractor extends Farmer {
+final class Tractor extends Farmer {
 
 	private ExcrementStorage storage;
 	private int ExcCounter;
