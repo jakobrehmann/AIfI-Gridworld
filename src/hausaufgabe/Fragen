@@ -6,7 +6,7 @@ Soll Bird immer unten Rechts enden
 Static vs NonStatic
 Soll "Instance" benutzt werden fuer Storages (Singleton Pattern)
 If Runner extends RunnerInterface, should we fill in all the methods. 
-
+Sollen alle Klassen einen Autor haben?
 
 Tasks
 Comment all Classes
