@@ -11,24 +11,37 @@ final class SheepShearer extends Farmer {
 	private WoolStorage storage;
 
 	public SheepShearer(WoolStorage storage) {
+
 		super();
 		this.storage = storage;
 		this.setColor(Color.BLUE);
+
 	}
 
 	@Override
 	public void processActors(ArrayList<Actor> actors) {
+
 		for (Actor a : actors) {
+
 			if (a instanceof Flower) {
+
 				a.removeSelfFromGrid();
-			}	
+
+			}
 
 			else if (a instanceof Sheep) {
+
 				if (((Sheep) a).isShearable()) {
+
 					storage.putWool();
 					((Sheep) a).setTimeSinceShear(0);
+
 				}
+
 			}
+
 		}
+
 	}
+
 }
