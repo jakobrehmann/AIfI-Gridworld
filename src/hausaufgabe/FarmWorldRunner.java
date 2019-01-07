@@ -9,15 +9,15 @@ public class FarmWorldRunner {
 
 	public static void main(String[] args) {
 
-		ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(20, 20));
-
+		ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(20,20));		
+		
 		WoolStorage storage = WoolStorage.getInstance();
 		world.add(storage);
 
 		ExcrementStorage storage2 = ExcrementStorage.getInstance();
 		world.add(storage2);
-		Location locBiogas = storage2.getLocation();
-
+		Location locBiogas = storage2.getLocation();	
+		
 		world.add(new Werewolf());
 		world.add(new SheepShearer(storage));
 		world.add(new SheepShearer(storage));

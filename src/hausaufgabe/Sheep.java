@@ -13,7 +13,7 @@ import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
-class Sheep extends Animal { 
+class Sheep extends Animal implements TerrifyinglyHuge { 
 
 	private int timeSinceShear;
 	private int lastExcrement;
