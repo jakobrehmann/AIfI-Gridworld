@@ -25,6 +25,7 @@ public class FriedrichTestet {
 		world.add(new Farmer());
 		world.add(new Tractor(storage2, locBiogas));
 		world.add(new CreatorFarmer());
+		world.add(new Bird());
 
 		world.show();
 

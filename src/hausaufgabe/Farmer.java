@@ -16,7 +16,7 @@ import gridworld.framework.actor.Flower;
  * flowers from grid
  */
 
-class Farmer extends Critter implements TerrifyinglyHuge{
+class Farmer extends Critter implements TerrifyinglyHuge {
 
 	public Farmer() {
 
@@ -39,10 +39,11 @@ class Farmer extends Critter implements TerrifyinglyHuge{
 		}
 
 	}
-	
-	public String toString()
-    {
-        return getClass().getSimpleName() ;
-    }
+
+	public String toString() {
+
+		return getClass().getSimpleName();
+
+	}
 
 }
