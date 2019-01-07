@@ -7,7 +7,7 @@ import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
-public class Excrement extends Animal {
+final class Excrement extends Animal {
 
 	private int time;
 
@@ -21,7 +21,7 @@ public class Excrement extends Animal {
 	@Override
 	public void act() {
 
-		Grid<Actor> gr = getGrid();
+		Grid<Actor> grid = getGrid();
 		Location loc = getLocation();
 
 		if (time >= 9) {
@@ -29,7 +29,7 @@ public class Excrement extends Animal {
 			removeSelfFromGrid();
 
 			Flower flower = new Flower();
-			flower.putSelfInGrid(gr, loc);
+			flower.putSelfInGrid(grid, loc);
 
 		}
 

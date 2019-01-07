@@ -7,7 +7,6 @@ package hausaufgabe;
 
 import java.awt.Color;
 import java.util.ArrayList;
-
 import gridworld.framework.actor.Actor;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
@@ -28,7 +27,6 @@ final class CreatorFarmer extends Farmer {
 	@Override
 	public void act() {
 
-		// Move Randomly
 		if (getGrid() == null) {
 
 			return;

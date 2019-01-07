@@ -40,6 +40,7 @@ class Farmer extends Critter implements TerrifyinglyHuge {
 
 	}
 
+	@Override
 	public String toString() {
 
 		return getClass().getSimpleName();

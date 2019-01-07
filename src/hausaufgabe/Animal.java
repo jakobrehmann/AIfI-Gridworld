@@ -142,20 +142,20 @@ class Animal extends Actor {
 
 	private Location findLead() {
 
-		Grid<Actor> gr = getGrid();
+		Grid<Actor> grid = getGrid();
 		ArrayList<Location> locs;
 
-		if (gr == null) {
+		if (grid == null) {
 
 			return null;
 
 		}
 
-		locs = gr.getOccupiedLocations();
+		locs = grid.getOccupiedLocations();
 
 		for (Location loc : locs) {
 
-			if (gr.get(loc) instanceof LeadSheep) {
+			if (grid.get(loc) instanceof LeadSheep) {
 
 				return loc;
 
@@ -182,7 +182,6 @@ class Animal extends Actor {
 
 	}
 
-	// Problem?!
 	private void makeMove(Location loc) {
 
 		if (loc == null) {
