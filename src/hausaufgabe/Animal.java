@@ -38,8 +38,10 @@ class Animal extends Actor {
 
 	}
 
-	public void setAge(int age) {
+	void setAge(int age) {
+
 		this.age = age;
+
 	}
 
 	// Adapted from Class Critter
@@ -78,29 +80,30 @@ class Animal extends Actor {
 
 		makeMove(loc);
 		age++;
+
 	}
 
 	private Location moveTowardsLeadSheep(ArrayList<Location> moveLocs, Location lead) {
 
-		double min_dist = 100000.00;
-		Location best_loc = null;
+		double minDistance = 100000.00;
+		Location bestLocation = null;
 
-		for (Location loc : moveLocs) {
+		for (Location location : moveLocs) {
 
-			double dr = loc.getRow() - lead.getRow();
-			double dc = loc.getCol() - lead.getCol();
-			double dist = Math.sqrt(dr * dr + dc * dc); // distance formula
+			double deltaRow = location.getRow() - lead.getRow();
+			double deltaCol = location.getCol() - lead.getCol();
+			double distance = Math.sqrt(deltaRow * deltaRow + deltaCol * deltaCol); // distance formula
 
-			if (dist < min_dist) {
+			if (distance < minDistance) {
 
-				min_dist = dist;
-				best_loc = loc;
+				minDistance = distance;
+				bestLocation = location;
 
 			}
 
 		}
 
-		return best_loc;
+		return bestLocation;
 
 	}
 
@@ -159,24 +162,27 @@ class Animal extends Actor {
 			}
 
 		}
+		
 		return null;
+		
 	}
 
 	private Location selectMoveLocation(ArrayList<Location> locs) {
 
-		int n = locs.size();
+		int size = locs.size();
 
-		if (n == 0) {
+		if (size == 0) {
 
 			return getLocation();
 
 		}
 
-		int r = (int) (Math.random() * n);
-		return locs.get(r);
+		int random = (int) (Math.random() * size);
+		return locs.get(random);
 
 	}
 
+	// Problem?!
 	private void makeMove(Location loc) {
 
 		if (loc == null) {

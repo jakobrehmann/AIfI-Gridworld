@@ -35,10 +35,10 @@ public class Tractor extends Farmer {
 //		System.out.println(excrementStationFull);
 //		System.out.println(mustCreateNewExcrementStation);
 //		
-		if (steps % 100 == 0 ) {
-			
+		if (steps % 100 == 0) {
+
 			System.out.println(steps);
-			
+
 		}
 
 		if (getGrid() == null) {
@@ -135,22 +135,11 @@ public class Tractor extends Farmer {
 
 			int tempLoc = getLocation().getDirectionToward(locBiogas);
 
-			if ((tempLoc % 90) != 0) {
+			Location nextLoc = getAdjacentLocation(tempLoc);
+			moveTo(nextLoc);
+			Location currentLocation = getLocation();
 
-				Location nextLoc = getAdjacentLocation(tempLoc);
-				moveTo(nextLoc);
-
-			} else {
-
-				tempLoc = tempLoc + 45;
-				Location nextLoc = getAdjacentLocation(tempLoc);
-				moveTo(nextLoc);
-
-			}
-
-			Location tempLoc1 = getLocation();
-
-			if (tempLoc1.hashCode() == locBiogas.hashCode()) {
+			if (currentLocation.hashCode() == locBiogas.hashCode()) {
 
 				excrementStationFull = false;
 				mustCreateNewExcrementStation = true;
