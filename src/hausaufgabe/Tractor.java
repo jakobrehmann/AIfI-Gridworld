@@ -110,13 +110,13 @@ public class Tractor extends Farmer {
 
 			if ((tempLoc % 90) != 0) {
 
-				Location nextLoc = getLocation().getAdjacentLocation(tempLoc);
+				Location nextLoc = getAdjacentLocation(tempLoc);
 				moveTo(nextLoc);
 
 			} else {
 
 				tempLoc = tempLoc + 45;
-				Location nextLoc = getLocation().getAdjacentLocation(tempLoc);
+				Location nextLoc = getAdjacentLocation(tempLoc);
 				moveTo(nextLoc);
 
 			}
@@ -146,64 +146,40 @@ public class Tractor extends Farmer {
 
 	}
 
-//	public Location getAdjacentLocation(int direction) {
-//
-//		int adjustedDirection = (direction + Location.HALF_RIGHT / 2) % Location.FULL_CIRCLE;
-//
-//		if (adjustedDirection < 0) {
-//
-//			adjustedDirection += Location.FULL_CIRCLE;
-//
-//		}
-//
-//		adjustedDirection = (adjustedDirection / Location.HALF_RIGHT) * Location.HALF_RIGHT;
-//		int dc = 0;
-//		int dr = 0;
-//
-//		if (adjustedDirection == Location.EAST) {
-//
-//			dc = 1;
-//
-//		}
-//
-//		else if (adjustedDirection == Location.SOUTHEAST) {
-//
-//			dc = 1;
-//
-//		} else if (adjustedDirection == Location.SOUTH) {
-//
-//			dr = 1;
-//
-//		}
-//
-//		else if (adjustedDirection == Location.SOUTHWEST) {
-//
-//			dr = 1;
-//
-//		} else if (adjustedDirection == Location.WEST) {
-//
-//			dc = -1;
-//
-//		}
-//
-//		else if (adjustedDirection == Location.NORTHWEST) {
-//
-//			dc = -1;
-//
-//		} else if (adjustedDirection == Location.NORTH) {
-//
-//			dr = -1;
-//
-//		}
-//
-//		else if (adjustedDirection == Location.NORTHEAST) {
-//
-//			dr = -1;
-//
-//		}
-//
-//		return new Location(getLocation().getRow() + dr, getLocation().getCol() + dc);
-//		
-//	}
+	public Location getAdjacentLocation(int direction) {
+
+		int adjustedDirection = (direction + Location.HALF_RIGHT / 2) % Location.FULL_CIRCLE;
+
+		if (adjustedDirection < 0) {
+
+			adjustedDirection += Location.FULL_CIRCLE;
+
+		}
+
+		adjustedDirection = (adjustedDirection / Location.HALF_RIGHT) * Location.HALF_RIGHT;
+		int dc = 0;
+		int dr = 0;
+
+		if (adjustedDirection == Location.EAST || adjustedDirection == Location.SOUTHEAST) {
+
+			dc = 1;
+
+		} else if (adjustedDirection == Location.SOUTH || adjustedDirection == Location.SOUTHWEST) {
+
+			dr = 1;
+
+		} else if (adjustedDirection == Location.WEST || adjustedDirection == Location.NORTHWEST) {
+
+			dc = -1;
+
+		} else if (adjustedDirection == Location.NORTH || adjustedDirection == Location.NORTHEAST) {
+
+			dr = -1;
+
+		}
+
+		return new Location(getLocation().getRow() + dr, getLocation().getCol() + dc);
+
+	}
 
 }

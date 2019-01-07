@@ -20,8 +20,8 @@ public class FriedrichTestet {
 
 		world.add(new Werewolf());
 		world.add(new SheepShearer(storage));
-
 		world.add(new SheepShearer(storage));
+		world.add(new Farmer());
 		world.add(new Farmer());
 		world.add(new Tractor(storage2, locBiogas));
 		world.add(new CreatorFarmer());
