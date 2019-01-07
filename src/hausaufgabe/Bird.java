@@ -36,65 +36,89 @@ final class Bird extends Animal{
 	}
 	
 	private void fleeMove() {
-		byte turnArounds = 0;
+		byte turns = 0;
+		Location loc = getLocation();
 		
-		while (turnArounds <= 4) {
-			Location loc = getValidLocation();
-			
-			if (loc != null) {
+		while (turns <= 4) {
+			loc = getValidLocation(loc);
+			if (loc != null && loc.compareTo(getLocation()) != 0) {
 				moveTo(loc);
 				return;
 			}
 			
-			setDirection(Location.RIGHT);
-			turnArounds++;
+			loc =  moveVirtuallyToBoundary();
+			setDirection(getDirection()+Location.RIGHT);
+			turns++;
 		}		
 		removeSelfFromGrid();
 	}
 	
-	private Location getValidLocation() {
+	private Location moveVirtuallyToBoundary() {
+		int row;
+		int col;
+		
+		switch(getDirection()) {
+			
+			case Location.NORTH:	row = 0;
+									col = getLocation().getCol();
+								
+			case Location.SOUTH: 	row = getGrid().getNumRows() - 1;
+									col = getLocation().getCol();
+								
+			case Location.WEST:		row = getLocation().getRow();
+									col = 0;
+						
+			default: 				row = getLocation().getRow();
+									col = getGrid().getNumCols() - 1;
+		}
+		Location boundary = new Location(row, col);
+		return boundary;
+				
+	}
+
+	private Location getValidLocation(Location loc) {
 		int direction = getDirection();
         
         if (direction == Location.NORTH){
         	   
-        	for (int i = getLocation().getRow(); i >= 0; i--) {
-        		Location loc = new Location(i, getLocation().getCol());
+        	for (int i = loc.getRow() - 1; i >= 0; i--) {
+        		Location futureLoc = new Location(i, loc.getCol());
         		
-        		if (getGrid().get(loc) == null || getGrid().get(loc) instanceof Flower) {
-        			return loc;
+        		if (getGrid().get(futureLoc) == null || getGrid().get(futureLoc) instanceof Flower) {
+        			return futureLoc;
         		}
         	}
         }
         
         if (direction == Location.SOUTH){
      	   
-        	for (int i = getLocation().getRow(); i <= getGrid().getNumRows() -1; i++) {
-        		Location loc = new Location(i, getLocation().getCol());
+        	for (int i = loc.getRow() + 1; i <= getGrid().getNumRows() -1; i++) {
+        		Location futureLoc = new Location(i, loc.getCol());
         		
-        		if (getGrid().get(loc) == null || getGrid().get(loc) instanceof Flower) {
-        			return loc;
-        		}
-        	}
-        }
-        
-        if (direction == Location.EAST){
-     	   
-        	for (int i = getLocation().getCol(); i >= 0; i--) {
-        		Location loc = new Location(getLocation().getRow(), i);
-        		
-        		if (getGrid().get(loc) == null || getGrid().get(loc) instanceof Flower) {
-        			return loc;
+        		if (getGrid().get(futureLoc) == null || getGrid().get(futureLoc) instanceof Flower) {
+        			return futureLoc;
         		}
         	}
         }
         
         if (direction == Location.WEST){
      	   
-        	for (int i = getLocation().getCol(); i <=  getGrid().getNumCols()-1; i++) {
-        		Location loc = new Location(getLocation().getRow(), i);
+        	for (int i = loc.getCol() - 1; i >= 0; i--) {
+        		Location futureLoc = new Location(loc.getRow(), i);
         		
-        		if (getGrid().get(loc) == null || getGrid().get(loc) instanceof Flower) {
-        			return loc;
+        		if (getGrid().get(futureLoc) == null || getGrid().get(futureLoc) instanceof Flower) {
+        			return futureLoc;
+        		}
+        	}
+        }
+        
+        if (direction == Location.EAST) {
+     	   
+        	for (int i = loc.getCol() + 1; i <=  getGrid().getNumCols()-1; i++) {
+        		Location futureLoc = new Location(loc.getRow(), i);
+        		
+        		if (getGrid().get(futureLoc) == null || getGrid().get(futureLoc) instanceof Flower) {
+        			return futureLoc;
         		}
         	}
         }       
@@ -112,9 +136,9 @@ final class Bird extends Animal{
 		} else {
 			
 			if (getLocation().compareTo(actor.getLocation()) == -1) {
-				setDirection(Location.EAST);
-			} else {
 				setDirection(Location.WEST);
+			} else {
+				setDirection(Location.EAST);
 			}
 		}
 	}
@@ -136,9 +160,7 @@ final class Bird extends Animal{
 			if (((Location)neighbor.getLocation()).getRow() == ((Location)this.getLocation()).getRow() || ((Location)neighbor.getLocation()).getCol() == ((Location)this.getLocation()).getCol()) {
 				terrifyinglyHugeNeighbors90Degree.add(neighbor);
 			}
-		}
-		
+		}		
 		return terrifyinglyHugeNeighbors90Degree;
-	}
-	        
+	}	        
 }
