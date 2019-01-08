@@ -167,7 +167,9 @@ class Sheep extends Animal implements TerrifyinglyHuge {
     
     @Override
     public String toString() {
+    	
 		return getClass().getSimpleName() + " [age = " + getAge() + " years, Shearable?: " + isShearable() + "]";
+		
 	}
 
 }
