@@ -5,29 +5,117 @@ import gridworld.framework.actor.ActorWorld;
 import gridworld.framework.grid.BoundedGrid;
 import gridworld.framework.grid.Location;
 
-public class FarmWorldRunner {
+public class FarmWorldRunner implements FarmWorldRunnerInterface {
+
+	private ActorWorld world;
 
 	public static void main(String[] args) {
 
-		ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(20, 20));
+	}
 
-		WoolStorage storage = WoolStorage.getInstance();
-		world.add(storage);
+	@Override
+	public void createNewWorldWithGridSize(int x, int y) {
+		// TODO Auto-generated method stub
+		world = new ActorWorld(new BoundedGrid<Actor>(x, y));
 
-	//	ExcrementStorage storage2 = ExcrementStorage.getInstance();
-		//world.add(storage2);
-		//Location locBiogas = storage2.getLocation();
+	}
 
-		world.add(new Werewolf());
-		world.add(new SheepShearer(storage));
-		world.add(new SheepShearer(storage));
-		world.add(new Farmer());
-	//	world.add(new Tractor(storage2, locBiogas));
-		world.add(new CreatorFarmer());
+	@Override
+	public void addAnimalIfFieldEmpty(int x, int y) {
+		// TODO Auto-generated method stub
+		Location loc = new Location(x, y);
 
-		world.add(new Sheep());
-		world.add(new Bird());
+		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
+			world.add(loc, new Animal());
+		}
+	}
 
-		world.show();
+	@Override
+	public void addSheepIfFieldEmpty(int x, int y) {
+		// TODO Auto-generated method stub
+		Location loc = new Location(x, y);
+
+		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
+			world.add(loc, new Sheep());
+		}
+
+	}
+
+	@Override
+	public void addLambIfFieldEmpty(int x, int y) {
+		// TODO Auto-generated method stub
+		Location loc = new Location(x, y);
+
+		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
+			world.add(loc, new Lamb());
+		}
+
+	}
+
+	@Override
+	public void addFarmerIfFieldEmpty(int x, int y) {
+		// TODO Auto-generated method stub
+Location loc  = new Location(x, y);
+		
+		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
+			world.add(loc, new Farmer());
+		}
+
+	}
+
+	@Override
+	public void addCreatorFarmerIfFieldEmpty(int x, int y) {
+		// TODO Auto-generated method stub
+Location loc  = new Location(x, y);
+		
+		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
+			world.add(loc, new CreatorFarmer());
+		}
+
+	}
+
+	@Override
+	public void addWoolStorageIfFieldEmpty(int x, int y) {
+		// TODO Auto-generated method stub
+Location loc  = new Location(x, y);
+		
+		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
+			world.add(loc, WoolStorage.getInstance());
+		}
+
+	}
+
+	@Override
+	public void addSheepShearerIfFieldEmpty(int x, int y) {
+		// TODO Auto-generated method stub
+Location loc  = new Location(x, y);
+		
+		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
+			world.add(loc, new SheepShearer(world.);
+		}
+	}
+
+	@Override
+	public void addGroupSpecificActorIfFieldEmpty(int x, int y) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void addFlowerIfFieldEmpty(int x, int y) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public String getToStringOfActorInField(int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void runNSteps(int n) {
+		// TODO Auto-generated method stub
+
 	}
 }
