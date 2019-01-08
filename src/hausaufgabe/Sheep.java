@@ -28,10 +28,11 @@ class Sheep extends Animal implements TerrifyinglyHuge {
 	}
 
 	public Sheep() {
+		
 		this(0);
 	}
 	
-	public void setTimeSinceShear(int timeSinceShear) {
+	void setTimeSinceShear(int timeSinceShear) {
 		this.timeSinceShear = timeSinceShear;
 	}
 
@@ -39,15 +40,17 @@ class Sheep extends Animal implements TerrifyinglyHuge {
 	@Override
 	public void act() {
 		
-		Location loc_act = getLocation();
-		Grid<Actor> grid_act = getGrid();
+		Location loc = getLocation();
+		Grid<Actor> grid = getGrid();
 		
 		super.act();
 		
 		// Because super.act() includes a method (makeMove) which also removes the sheep, this method 
 		// needs a control condition.
 		if (getGrid() == null) {
+			
 			return;
+			
 		}
 		
 		// Generate New Lamb
@@ -57,6 +60,22 @@ class Sheep extends Animal implements TerrifyinglyHuge {
 			
 		}
 
+
+
+		// Generate Excrement 
+		if (lastExcrement > 10 && Math.random() > 0.5) {
+
+			makesExcrement(loc, grid);
+
+		}
+		
+		// Generate Lead Sheep, if none exists		
+		if (!existLead()) {
+			
+			new LeadSheep(grid) ;
+			
+		}
+		
 		// Death of Sheep
 		if (super.getAge() >= 10 && Math.random() < 0.1666666) {
 
@@ -64,27 +83,24 @@ class Sheep extends Animal implements TerrifyinglyHuge {
 
 		}
 
-		// Generate Excrement 
-		if (lastExcrement > 10 && Math.random() > 0.5) {
-
-			Excrement excrement = new Excrement();
-			excrement.putSelfInGrid(grid_act, loc_act);
-			lastExcrement = 0;
-
-		}
-		
-		// Generate Lead Sheep, if none exists		
-		if (!existLead()) {
-			new LeadSheep(grid_act) ;
-			
-		}	
-
 		lastExcrement ++ ;
 		timeSinceShear ++ ;
 	}
 
-	private void dies() {
+	private void makesExcrement(Location loc, Grid<Actor> grid) {
+		Excrement excrement = new Excrement();
+		excrement.putSelfInGrid(grid, loc);
+		lastExcrement = 0;
+	}
 
+	private void dies() {
+		
+		if (getGrid() == null) {
+					
+					return;
+					
+				}
+		
 		Location loc = getLocation();
 		Grid<Actor> grid = getGrid();
 		removeSelfFromGrid();	
@@ -96,40 +112,54 @@ class Sheep extends Animal implements TerrifyinglyHuge {
 
 	// Adapted from Class Critter
 	private ArrayList<Location> getLocationsForNewLamb() {
+		
 		Grid<Actor> grid = getGrid();
-		if (grid == null)
+		if (grid == null) {
+			
 			return null ;
+			
+		}
+			
 		return grid.getEmptyAdjacentLocations(getLocation());
 	}
 
 	private void setNewLamb() {
+		
 		if (getLocationsForNewLamb() == null || getLocationsForNewLamb().isEmpty()) {
+			
 			return;
+			
 		}
+		
 		Location newLambPosition = getLocationsForNewLamb().get(0);
 		Lamb newLamb = new Lamb();
 		newLamb.putSelfInGrid(getGrid(), newLambPosition);
+		
 	}
 
 	boolean isShearable() {
+		
 		if (timeSinceShear > 2) {
+			
 			return true;
+			
 		}
 		return false;
 	}
 	
 	
     private boolean existLead() {
-        Grid<Actor> gr = getGrid();
+    	
+        Grid<Actor> grid = getGrid();
         
         ArrayList<Location> locs ;
-        if (gr == null)
+        if (grid == null)
             return true;
         
-        locs = gr.getOccupiedLocations(); 
+        locs = grid.getOccupiedLocations(); 
         
         for (Location loc : locs) {
-        	if (gr.get(loc) instanceof LeadSheep)
+        	if (grid.get(loc) instanceof LeadSheep)
         		return true ;
         }
         return false ;
