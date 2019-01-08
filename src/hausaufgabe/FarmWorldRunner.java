@@ -55,8 +55,8 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 	@Override
 	public void addFarmerIfFieldEmpty(int x, int y) {
 		// TODO Auto-generated method stub
-Location loc  = new Location(x, y);
-		
+		Location loc = new Location(x, y);
+
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
 			world.add(loc, new Farmer());
 		}
@@ -66,8 +66,8 @@ Location loc  = new Location(x, y);
 	@Override
 	public void addCreatorFarmerIfFieldEmpty(int x, int y) {
 		// TODO Auto-generated method stub
-Location loc  = new Location(x, y);
-		
+		Location loc = new Location(x, y);
+
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
 			world.add(loc, new CreatorFarmer());
 		}
@@ -77,8 +77,8 @@ Location loc  = new Location(x, y);
 	@Override
 	public void addWoolStorageIfFieldEmpty(int x, int y) {
 		// TODO Auto-generated method stub
-Location loc  = new Location(x, y);
-		
+		Location loc = new Location(x, y);
+
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
 			world.add(loc, WoolStorage.getInstance());
 		}
