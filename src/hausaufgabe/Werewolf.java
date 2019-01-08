@@ -20,6 +20,7 @@ import gridworld.framework.grid.Location;
  */
 
 
+
 final class Werewolf extends Farmer{
 
 	public Werewolf() {
