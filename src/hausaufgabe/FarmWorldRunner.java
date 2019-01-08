@@ -9,13 +9,16 @@ import gridworld.framework.grid.BoundedGrid;
 import gridworld.framework.grid.Location;
 
 public class FarmWorldRunner implements FarmWorldRunnerInterface {
-
+	
 	private ActorWorld world;
 
 	public static void main(String[] args) {
 		FarmWorldRunner runner = new FarmWorldRunner();
 		runner.createNewWorldWithGridSize(20, 20);
 		runner.addLambIfFieldEmpty(10, 10);
+		runner.addCreatorFarmerIfFieldEmpty(7, 4);
+		runner.addFarmerIfFieldEmpty(10, 10);
+		
 
 	}
 
@@ -23,7 +26,7 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 	public void createNewWorldWithGridSize(int x, int y) {
 		// TODO Auto-generated method stub
 		world = new ActorWorld(new BoundedGrid<Actor>(x, y));
-
+		world.show();
 	}
 
 	@Override
