@@ -2,10 +2,8 @@ package hausaufgabe;
 
 import java.awt.Color;
 import java.util.ArrayList;
-
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;
-import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
 public class Tractor extends Farmer {
@@ -14,9 +12,7 @@ public class Tractor extends Farmer {
 	private int ExcCounter;
 	private Location locBiogas;
 	private boolean excrementStationFull;
-	private boolean mustCreateNewExcrementStation;
-
-	private int steps = 0;
+	private boolean makeNoMove;
 
 	public Tractor(ExcrementStorage storage, Location locBiogas) {
 
@@ -25,21 +21,11 @@ public class Tractor extends Farmer {
 		this.setColor(Color.RED);
 		this.locBiogas = locBiogas;
 		this.excrementStationFull = false;
-		this.mustCreateNewExcrementStation = false;
+		this.makeNoMove = false;
 
 	}
 
 	public void act() {
-
-		steps++;
-//		System.out.println(excrementStationFull);
-//		System.out.println(mustCreateNewExcrementStation);
-//		
-		if (steps % 100 == 0) {
-
-			System.out.println(steps);
-
-		}
 
 		if (getGrid() == null) {
 
@@ -48,9 +34,9 @@ public class Tractor extends Farmer {
 		}
 
 		ArrayList<Actor> actors = getActors();
-		processActors(actors); // !!!!!!!!!!!!
+		processActors(actors);
 
-		if (!excrementStationFull) {
+		if (!excrementStationFull && !makeNoMove) {
 
 			ArrayList<Location> moveLocs = getMoveLocations();
 			Location loc = selectMoveLocation(moveLocs);
@@ -63,39 +49,15 @@ public class Tractor extends Farmer {
 	@Override
 	public void processActors(ArrayList<Actor> actors) {
 
-		if (mustCreateNewExcrementStation) {
-
-			ExcrementStorage excrementStorage = ExcrementStorage.getInstance();
-			Grid<Actor> grid = getGrid();
-
-			Location tempLoc2 = getLocation();
-
-			if (tempLoc2.hashCode() != locBiogas.hashCode()) {
-
-				excrementStorage.putSelfInGrid(grid, locBiogas);
-
-			} else {
-
-				ArrayList<Location> moveLocs = getMoveLocations();
-				Location loc = selectMoveLocation(moveLocs);
-				makeMove(loc);
-				excrementStorage.putSelfInGrid(grid, locBiogas);
-
-			}
-
-			this.storage = excrementStorage;
-			ExcrementStorage.amountOfExcrement = 0;
-			mustCreateNewExcrementStation = false;
-
-		}
-
 		if (!excrementStationFull) {
+
+			makeNoMove = false;
 
 			for (Actor a : actors) {
 
 				if (a instanceof Flower) {
 
-					a.removeSelfFromGrid(); // !!!!!!!!!
+					a.removeSelfFromGrid();
 
 				}
 
@@ -103,7 +65,6 @@ public class Tractor extends Farmer {
 
 					if (!excrementStationFull) {
 
-						storage.putExcrement();
 						a.removeSelfFromGrid();
 						ExcCounter++;
 
@@ -131,18 +92,28 @@ public class Tractor extends Farmer {
 
 			}
 
-			ExcCounter = 0;
-
 			int tempLoc = getLocation().getDirectionToward(locBiogas);
-
 			Location nextLoc = getAdjacentLocation(tempLoc);
 			moveTo(nextLoc);
-			Location currentLocation = getLocation();
 
-			if (currentLocation.hashCode() == locBiogas.hashCode()) {
+			ArrayList<Actor> checkExcrementStorage = getActors();
 
-				excrementStationFull = false;
-				mustCreateNewExcrementStation = true;
+			for (Actor a : checkExcrementStorage) {
+
+				if (a instanceof ExcrementStorage) {
+
+					excrementStationFull = false;
+
+					for (int i = 0; i < 5; i++) {
+
+						storage.putExcrement();
+
+					}
+
+					ExcCounter = 0;
+					makeNoMove = true;
+
+				}
 
 			}
 
@@ -195,6 +166,13 @@ public class Tractor extends Farmer {
 		}
 
 		return new Location(getLocation().getRow() + dr, getLocation().getCol() + dc);
+
+	}
+
+	@Override
+	public String toString() {
+
+		return getClass().getSimpleName() + " [ExcrementCounter = " + ExcCounter + "]";
 
 	}
 
