@@ -85,54 +85,17 @@ final class Tractor extends Farmer {
 
 		} else {
 
-//			for (Actor a : actors) {
-//
-//				if (a instanceof Flower) {
-//
-//					a.removeSelfFromGrid();
-//
-//				}
-//
-//			}
+			for (Actor a : actors) {
 
-//			int tempLoc = getLocation().getDirectionToward(locBiogas);
-//			System.out.println(tempLoc);
-//			Location nextLoc = getAdjacentLocation(tempLoc);
-//			moveTo(nextLoc);
-//
-//			ArrayList<Actor> checkExcrementStorage = getActors();
-//
-//			for (Actor a : checkExcrementStorage) {
-//
-//				if (a instanceof ExcrementStorage) {
-//
-//					System.out.println("Ich bin angekommen!");
-//					excrementStationFull = false;
-//
-//					for (int i = 0; i < 5; i++) {
-//
-//						storage.putExcrement();
-//
-//					}
-//
-//					ExcCounter = 0;
-//					makeNoMove = true;
-//					
-//				
-//
-//				} else {
-//					
-//					
-//					int tempLoc = getLocation().getDirectionToward(locBiogas);
-//					System.out.println(tempLoc);
-//					Location nextLoc = getAdjacentLocation(tempLoc);
-//					moveTo(nextLoc);
-//					System.out.println("Ich hänge hier fest! #001");
-//					
-//					
-//				}
-//
-//			}
+				if (a instanceof Flower) {
+
+					a.removeSelfFromGrid();
+
+				}
+
+			}
+			
+			goToExcrementStorage(locBiogas);
 
 		}
 
@@ -150,7 +113,7 @@ final class Tractor extends Farmer {
 
 	}
 
-	public Location goToExcrementStorage(Location locBiogas) {
+	public void goToExcrementStorage(Location locBiogas) {
 
 		ArrayList<Actor> checkAroundYou;
 		checkAroundYou = getActors();
@@ -212,13 +175,13 @@ final class Tractor extends Farmer {
 
 				}
 
-				// go to storage
+				moveTo(bestLocation);
 
 			}
 
 		}
 
-		return bestLocation;
+//		return bestLocation;
 
 //		ArrayList<Actor> checkExcrementer = getActors();
 //
