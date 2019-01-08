@@ -52,6 +52,7 @@ public class Tractor extends Farmer {
 		if (!excrementStationFull) {
 
 			makeNoMove = false;
+			System.out.println("Ich bin wieder raus!");
 
 			for (Actor a : actors) {
 
@@ -91,8 +92,14 @@ public class Tractor extends Farmer {
 				}
 
 			}
+			
+			
+			
+			
+			
 
 			int tempLoc = getLocation().getDirectionToward(locBiogas);
+			System.out.println(tempLoc);
 			Location nextLoc = getAdjacentLocation(tempLoc);
 			moveTo(nextLoc);
 
@@ -102,6 +109,7 @@ public class Tractor extends Farmer {
 
 				if (a instanceof ExcrementStorage) {
 
+					System.out.println("Ich bin angekommen!");
 					excrementStationFull = false;
 
 					for (int i = 0; i < 5; i++) {
@@ -112,8 +120,20 @@ public class Tractor extends Farmer {
 
 					ExcCounter = 0;
 					makeNoMove = true;
-
+					
 				}
+
+//				} else {
+//					
+//					
+//					int tempLoc = getLocation().getDirectionToward(locBiogas);
+//					System.out.println(tempLoc);
+//					Location nextLoc = getAdjacentLocation(tempLoc);
+//					moveTo(nextLoc);
+//					System.out.println("Ich hänge hier fest! #001");
+//					
+//					
+//				}
 
 			}
 
