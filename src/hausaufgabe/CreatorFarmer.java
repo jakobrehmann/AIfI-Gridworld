@@ -57,7 +57,7 @@ final class CreatorFarmer extends Farmer {
 
 				Location loc = new Location(r, c);
 
-				if (grid.get(loc) instanceof Sheep || grid.get(loc) instanceof Lamb) {
+				if (grid.get(loc) instanceof Sheep) {
 
 					return true;
 

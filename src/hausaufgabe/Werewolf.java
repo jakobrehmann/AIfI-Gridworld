@@ -26,6 +26,14 @@ final class Werewolf extends Farmer{
 		
 	}
 	
+	
+	/**
+     * A Werewolf acts by getting locations to move to (with the motive of
+     * either eating or getting closer to a Lamb), selecting one of them, 
+     * and moving to the selected location. If the Werewolf moves onto the
+     * field containing a Lamb it automatically removes (eats) it; this makes
+     *  it unnecessary to use getActors() or processActors(actors).
+     */	
 	@Override
 	public void act() {
 		
@@ -38,6 +46,17 @@ final class Werewolf extends Farmer{
         
 	}
 
+	
+    /**
+     * Gets a list of possible locations for the next move. The first criteria 
+     * returns a list of the locations of neighboring lambs (which the Werewolf 
+     * wants to eat). If this list is empty (no Lambs), it checks if there are Lambs
+     * nearby (only one free location between Werewolf and Lamb), and returns a list
+     * of locations where the Werewolf can get closer to a Lamb. If no Lambs are
+     * nearby, a list of all empty adjacent locations is returned. 
+     * Postcondition: The state of all actors is unchanged.
+     * @return a list of possible locations for the next move
+     */
 	@Override
     public ArrayList<Location> getMoveLocations(){
 		
@@ -70,9 +89,15 @@ final class Werewolf extends Farmer{
 
     }
 	
+	
+    /**
+     * Gets a list of  locations of adjacent lambs.
+     * Postcondition: The state of all actors is unchanged.
+     * @return a list of  locations of adjacent Lambs
+     */
 	 public ArrayList<Location> checkForLamb(Location loc) {
 		 ArrayList<Location> moveLocs = new ArrayList<Location>();   
-		 for (Location neighborLoc : getGrid().getValidAdjacentLocations(loc)){
+		 for (Location neighborLoc : getGrid().getOccupiedAdjacentLocations(loc)){
 	            if (getGrid().get(neighborLoc) instanceof Eatable)
 	                moveLocs.add(neighborLoc) ;
         }
