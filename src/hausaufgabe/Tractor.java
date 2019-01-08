@@ -52,7 +52,7 @@ public class Tractor extends Farmer {
 		if (!excrementStationFull) {
 
 			makeNoMove = false;
-			System.out.println("Ich bin wieder raus!");
+//			System.out.println("Ich bin wieder raus!");
 
 			for (Actor a : actors) {
 
@@ -83,46 +83,46 @@ public class Tractor extends Farmer {
 
 		} else {
 
-			for (Actor a : actors) {
-
-				if (a instanceof Flower) {
-
-					a.removeSelfFromGrid();
-
-				}
-
-			}
+//			for (Actor a : actors) {
+//
+//				if (a instanceof Flower) {
+//
+//					a.removeSelfFromGrid();
+//
+//				}
+//
+//			}
 			
 			
 			
 			
 			
 
-			int tempLoc = getLocation().getDirectionToward(locBiogas);
-			System.out.println(tempLoc);
-			Location nextLoc = getAdjacentLocation(tempLoc);
-			moveTo(nextLoc);
-
-			ArrayList<Actor> checkExcrementStorage = getActors();
-
-			for (Actor a : checkExcrementStorage) {
-
-				if (a instanceof ExcrementStorage) {
-
-					System.out.println("Ich bin angekommen!");
-					excrementStationFull = false;
-
-					for (int i = 0; i < 5; i++) {
-
-						storage.putExcrement();
-
-					}
-
-					ExcCounter = 0;
-					makeNoMove = true;
-					
-				}
-
+//			int tempLoc = getLocation().getDirectionToward(locBiogas);
+//			System.out.println(tempLoc);
+//			Location nextLoc = getAdjacentLocation(tempLoc);
+//			moveTo(nextLoc);
+//
+//			ArrayList<Actor> checkExcrementStorage = getActors();
+//
+//			for (Actor a : checkExcrementStorage) {
+//
+//				if (a instanceof ExcrementStorage) {
+//
+//					System.out.println("Ich bin angekommen!");
+//					excrementStationFull = false;
+//
+//					for (int i = 0; i < 5; i++) {
+//
+//						storage.putExcrement();
+//
+//					}
+//
+//					ExcCounter = 0;
+//					makeNoMove = true;
+//					
+//				
+//
 //				} else {
 //					
 //					
@@ -130,12 +130,12 @@ public class Tractor extends Farmer {
 //					System.out.println(tempLoc);
 //					Location nextLoc = getAdjacentLocation(tempLoc);
 //					moveTo(nextLoc);
-//					System.out.println("Ich hänge hier fest! #001");
+////					System.out.println("Ich hänge hier fest! #001");
 //					
 //					
 //				}
-
-			}
+//
+//			}
 
 		}
 
@@ -153,6 +153,21 @@ public class Tractor extends Farmer {
 
 	}
 
+	public void goToExcrementStorage(Location locBiogas) {
+		
+		for (Actor a : actors)
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
 	public Location getAdjacentLocation(int direction) {
 
 		int adjustedDirection = (direction + Location.HALF_RIGHT / 2) % Location.FULL_CIRCLE;
