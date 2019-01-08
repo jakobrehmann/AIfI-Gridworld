@@ -92,11 +92,6 @@ public class Tractor extends Farmer {
 //				}
 //
 //			}
-			
-			
-			
-			
-			
 
 //			int tempLoc = getLocation().getDirectionToward(locBiogas);
 //			System.out.println(tempLoc);
@@ -154,20 +149,62 @@ public class Tractor extends Farmer {
 	}
 
 	public void goToExcrementStorage(Location locBiogas) {
-		
-		for (Actor a : actors)
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+		ArrayList<Actor> checkAroundYou;
+		checkAroundYou = getActors();
+
+		for (Actor check : checkAroundYou) {
+
+			if (check instanceof Flower) {
+
+				check.removeSelfFromGrid();
+
+			}
+
+			if (check instanceof ExcrementStorage) {
+
+				excrementStationFull = false;
+				ExcCounter = 0;
+				makeNoMove = true;
+
+				for (int i = 0; i < 5; i++) {
+
+					storage.putExcrement();
+
+				}
+
+			} else {
+
+				// go to storage
+
+			}
+
+		}
+
+//		ArrayList<Actor> checkExcrementer = getActors();
+//
+//		for (Actor b : checkExcrementer) {
+//
+//			if (b instanceof checkExcrementer) {
+//
+//				System.out.println("Ich bin angekommen!");
+//				excrementStationFull = false;
+//
+//				for (int i = 0; i < 5; i++) {
+//
+//					storage.putExcrement();
+//
+//				}
+//
+//				ExcCounter = 0;
+//				makeNoMove = true;
+//
+//			}
+//
+//		}
+
 	}
-	
+
 	public Location getAdjacentLocation(int direction) {
 
 		int adjustedDirection = (direction + Location.HALF_RIGHT / 2) % Location.FULL_CIRCLE;
