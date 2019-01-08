@@ -16,7 +16,7 @@ import gridworld.framework.grid.Location;
  * <code>Sheep</code> at age 4.
  */
 
-final class Lamb extends Animal implements Eatable{
+final class Lamb extends Animal implements Eatable {
 
 	public Lamb() {
 
@@ -33,7 +33,7 @@ final class Lamb extends Animal implements Eatable{
 			Grid<Actor> gr = getGrid();
 //			this.removeSelfFromGrid();
 			if (gr == null)
-	            return;
+				return;
 			Sheep newSheep = new Sheep(4);
 			newSheep.putSelfInGrid(gr, loc);
 		}
