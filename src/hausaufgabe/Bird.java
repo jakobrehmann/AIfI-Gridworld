@@ -105,18 +105,22 @@ final class Bird extends Animal {
 																													// safe.
 
 					setDirection(Location.NORTH);
+					return;
 
 				} else if (locationSafe(Location.SOUTH, fleeFields)) {
 
 					setDirection(Location.SOUTH);
+					return;
 
 				} else if (locationSafe(Location.EAST, fleeFields)) {
 
 					setDirection(Location.EAST);
+					return;
 
 				} else if (locationSafe(Location.WEST, fleeFields)) {
 
 					setDirection(Location.WEST);
+					return;
 				}
 
 			} else {
@@ -124,18 +128,22 @@ final class Bird extends Animal {
 				if (getLocation().compareTo(a.getLocation()) == -1 && locationSafe(Location.WEST, fleeFields)) {
 
 					setDirection(Location.WEST);
+					return;
 
 				} else if (locationSafe(Location.EAST, fleeFields)) {
 
 					setDirection(Location.EAST);
+					return;
 					
 				} else if (locationSafe(Location.NORTH, fleeFields)) {
 
 					setDirection(Location.NORTH);
+					return;
 
 				} else if (locationSafe(Location.SOUTH, fleeFields)) {
 
 					setDirection(Location.SOUTH);
+					return;
 				}
 			}
 		}

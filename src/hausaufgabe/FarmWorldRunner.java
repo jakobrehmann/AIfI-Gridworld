@@ -18,6 +18,7 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 		runner.addLambIfFieldEmpty(10, 10);
 		runner.addCreatorFarmerIfFieldEmpty(7, 4);
 		runner.addFarmerIfFieldEmpty(10, 10);
+		runner.addGroupSpecificActorIfFieldEmpty(12, 5);
 		
 
 	}
@@ -124,7 +125,13 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 //		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
 //			world.add(loc, new Bird()); // Marcel Heine actor
 //		world.add(loc, new Werewolf()); // Jakob Rehmann actor
-//		world.add(loc, new Tractor()); // Friedrich Voelkers actor	 
+		
+		
+		
+		ExcrementStorage excrementStorage = ExcrementStorage.getInstance();
+		world.add(excrementStorage);
+		Location locBiogas = excrementStorage.getLocation();
+		world.add(loc, new Tractor(excrementStorage, locBiogas)); // Friedrich Voelkers actor	 
 
 //		}
 		
@@ -160,6 +167,5 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 	@Override
 	public void runNSteps(int n) {
 		// TODO Auto-generated method stub
-
 	}
 }
