@@ -2,6 +2,8 @@ package hausaufgabe;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Location;
@@ -125,7 +127,7 @@ final class Tractor extends Farmer {
 //					System.out.println(tempLoc);
 //					Location nextLoc = getAdjacentLocation(tempLoc);
 //					moveTo(nextLoc);
-////					System.out.println("Ich hänge hier fest! #001");
+//					System.out.println("Ich hänge hier fest! #001");
 //					
 //					
 //				}
@@ -148,10 +150,11 @@ final class Tractor extends Farmer {
 
 	}
 
-	public void goToExcrementStorage(Location locBiogas) {
+	public Location goToExcrementStorage(Location locBiogas) {
 
 		ArrayList<Actor> checkAroundYou;
 		checkAroundYou = getActors();
+		Location bestLocation = null;
 
 		for (Actor check : checkAroundYou) {
 
@@ -170,18 +173,52 @@ final class Tractor extends Farmer {
 				for (int i = 0; i < 5; i++) {
 
 					storage.putExcrement();
-					// test
-					// teste
 
 				}
 
 			} else {
+
+				ArrayList<Location> possibleLocation = getGrid().getEmptyAdjacentLocations(getLocation());
+				possibleLocation.add(getLocation());
+//				Location bestLocation = null;
+				double minDistance = 100000.00;
+
+				for (Iterator<Location> iterator = possibleLocation.iterator(); iterator.hasNext();) {
+
+					Location locToProof = iterator.next();
+
+					int tempDirection = locToProof.getDirectionToward(locBiogas);
+
+					if ((tempDirection % 90) != 0) {
+
+						possibleLocation.remove(locToProof);
+
+					}
+
+				}
+
+				for (Location location : possibleLocation) {
+
+					double deltaRow = location.getRow() - locBiogas.getRow();
+					double deltaCol = location.getCol() - locBiogas.getCol();
+					double distance = Math.sqrt(deltaRow * deltaRow + deltaCol * deltaCol); // distance formula
+
+					if (distance < minDistance) {
+
+						minDistance = distance;
+						bestLocation = location;
+
+					}
+
+				}
 
 				// go to storage
 
 			}
 
 		}
+
+		return bestLocation;
 
 //		ArrayList<Actor> checkExcrementer = getActors();
 //
