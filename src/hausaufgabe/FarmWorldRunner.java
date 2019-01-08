@@ -1,7 +1,10 @@
 package hausaufgabe;
 
+import java.util.ArrayList;
+
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.ActorWorld;
+import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.BoundedGrid;
 import gridworld.framework.grid.Location;
 
@@ -10,6 +13,9 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 	private ActorWorld world;
 
 	public static void main(String[] args) {
+		FarmWorldRunner runner = new FarmWorldRunner();
+		runner.createNewWorldWithGridSize(20, 20);
+		runner.addLambIfFieldEmpty(10, 10);
 
 	}
 
@@ -55,8 +61,8 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 	@Override
 	public void addFarmerIfFieldEmpty(int x, int y) {
 		// TODO Auto-generated method stub
-Location loc  = new Location(x, y);
-		
+		Location loc = new Location(x, y);
+
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
 			world.add(loc, new Farmer());
 		}
@@ -66,8 +72,8 @@ Location loc  = new Location(x, y);
 	@Override
 	public void addCreatorFarmerIfFieldEmpty(int x, int y) {
 		// TODO Auto-generated method stub
-Location loc  = new Location(x, y);
-		
+		Location loc = new Location(x, y);
+
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
 			world.add(loc, new CreatorFarmer());
 		}
@@ -77,8 +83,8 @@ Location loc  = new Location(x, y);
 	@Override
 	public void addWoolStorageIfFieldEmpty(int x, int y) {
 		// TODO Auto-generated method stub
-Location loc  = new Location(x, y);
-		
+		Location loc = new Location(x, y);
+
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
 			world.add(loc, WoolStorage.getInstance());
 		}
@@ -88,28 +94,63 @@ Location loc  = new Location(x, y);
 	@Override
 	public void addSheepShearerIfFieldEmpty(int x, int y) {
 		// TODO Auto-generated method stub
-Location loc  = new Location(x, y);
-		
+		Location loc = new Location(x, y);
+
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
-			world.add(loc, new SheepShearer(world.);
+
+			ArrayList<Location> list = world.getGrid().getOccupiedLocations();
+
+			for (Location location : list) {
+
+				if (world.getGrid().get(location) instanceof WoolStorage) {
+
+					WoolStorage storage = (WoolStorage) world.getGrid().get(location);
+					world.add(loc, new SheepShearer(storage));
+					break;
+				}
+			}
 		}
 	}
 
+	// Marcel Heine actor
 	@Override
 	public void addGroupSpecificActorIfFieldEmpty(int x, int y) {
 		// TODO Auto-generated method stub
+		Location loc = new Location(x, y);
+
+//		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
+//			world.add(loc, new Bird()); // Marcel Heine actor
+//		world.add(loc, new Werewolf()); // Jakob Rehmann actor
+//		world.add(loc, new Tractor()); // Friedrich Voelkers actor	 
+
+//		}
+		
+		
 
 	}
 
 	@Override
 	public void addFlowerIfFieldEmpty(int x, int y) {
 		// TODO Auto-generated method stub
+		Location loc = new Location(x, y);
+
+		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
+			world.add(loc, new Flower());
+		}
 
 	}
 
 	@Override
 	public String getToStringOfActorInField(int x, int y) {
 		// TODO Auto-generated method stub
+		
+		Location loc = new Location(x, y);	
+		
+		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) != null) {
+			
+			 Actor actor = world.getGrid().get(loc);
+			 return actor.toString();
+		}
 		return null;
 	}
 
