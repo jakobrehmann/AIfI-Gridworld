@@ -29,6 +29,7 @@ final class Werewolf extends Farmer{
 	}
 	
 	
+	
 	/**
      * A Werewolf acts by getting locations to move to (with the motive of
      * either eating or getting closer to a Lamb), selecting one of them, 
