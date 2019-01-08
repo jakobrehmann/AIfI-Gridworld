@@ -2,6 +2,8 @@ package hausaufgabe;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Location;
@@ -83,54 +85,17 @@ final class Tractor extends Farmer {
 
 		} else {
 
-//			for (Actor a : actors) {
-//
-//				if (a instanceof Flower) {
-//
-//					a.removeSelfFromGrid();
-//
-//				}
-//
-//			}
+			for (Actor a : actors) {
 
-//			int tempLoc = getLocation().getDirectionToward(locBiogas);
-//			System.out.println(tempLoc);
-//			Location nextLoc = getAdjacentLocation(tempLoc);
-//			moveTo(nextLoc);
-//
-//			ArrayList<Actor> checkExcrementStorage = getActors();
-//
-//			for (Actor a : checkExcrementStorage) {
-//
-//				if (a instanceof ExcrementStorage) {
-//
-//					System.out.println("Ich bin angekommen!");
-//					excrementStationFull = false;
-//
-//					for (int i = 0; i < 5; i++) {
-//
-//						storage.putExcrement();
-//
-//					}
-//
-//					ExcCounter = 0;
-//					makeNoMove = true;
-//					
-//				
-//
-//				} else {
-//					
-//					
-//					int tempLoc = getLocation().getDirectionToward(locBiogas);
-//					System.out.println(tempLoc);
-//					Location nextLoc = getAdjacentLocation(tempLoc);
-//					moveTo(nextLoc);
-////					System.out.println("Ich hänge hier fest! #001");
-//					
-//					
-//				}
-//
-//			}
+				if (a instanceof Flower) {
+
+					a.removeSelfFromGrid();
+
+				}
+
+			}
+			
+			goToExcrementStorage(locBiogas);
 
 		}
 
@@ -152,6 +117,7 @@ final class Tractor extends Farmer {
 
 		ArrayList<Actor> checkAroundYou;
 		checkAroundYou = getActors();
+		Location bestLocation = null;
 
 		for (Actor check : checkAroundYou) {
 
@@ -170,18 +136,52 @@ final class Tractor extends Farmer {
 				for (int i = 0; i < 5; i++) {
 
 					storage.putExcrement();
-					// test
-					// teste
 
 				}
 
 			} else {
 
-				// go to storage
+				ArrayList<Location> possibleLocation = getGrid().getEmptyAdjacentLocations(getLocation());
+				possibleLocation.add(getLocation());
+//				Location bestLocation = null;
+				double minDistance = 100000.00;
+
+				for (Iterator<Location> iterator = possibleLocation.iterator(); iterator.hasNext();) {
+
+					Location locToProof = iterator.next();
+
+					int tempDirection = locToProof.getDirectionToward(locBiogas);
+
+					if ((tempDirection % 90) != 0) {
+
+						possibleLocation.remove(locToProof);
+
+					}
+
+				}
+
+				for (Location location : possibleLocation) {
+
+					double deltaRow = location.getRow() - locBiogas.getRow();
+					double deltaCol = location.getCol() - locBiogas.getCol();
+					double distance = Math.sqrt(deltaRow * deltaRow + deltaCol * deltaCol); // distance formula
+
+					if (distance < minDistance) {
+
+						minDistance = distance;
+						bestLocation = location;
+
+					}
+
+				}
+
+				moveTo(bestLocation);
 
 			}
 
 		}
+
+//		return bestLocation;
 
 //		ArrayList<Actor> checkExcrementer = getActors();
 //

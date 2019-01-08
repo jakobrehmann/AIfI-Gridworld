@@ -3,6 +3,7 @@
  * @author Jakob
  */
 
+
 package hausaufgabe;
 
 import java.awt.Color;
@@ -10,28 +11,24 @@ import java.util.ArrayList;
 
 import gridworld.framework.grid.Location;
 
+
 /**
- * A <code>Werewolf</code> is a <code>Farmer</code> moves around the that moves
- * to and removes (eats) a Actors who implement the <code>Eatable</code>
- * Interface (<code>Lamb</code>) if one is on an adjacent field, move towards a
- * <code>Lamb</code> if it is nearby, or moves randomly if no Lamb is located
- * nearby.
+ * A <code>Werewolf</code> is a <code>Farmer</code> moves around the that moves to and removes 
+ * (eats) a Actors who implement the <code>Eatable</code> Interface (<code>Lamb</code>) 
+ * if one is on an adjacent field, move towards a <code>Lamb</code> if it is nearby, 
+ * or moves randomly if no Lamb is located nearby.
  */
 
-<<<<<<< HEAD
-public class Werewolf extends Farmer {
-=======
+
+
 final class Werewolf extends Farmer{
->>>>>>> branch 'master' of https://gitlab.tubit.tu-berlin.de/AIfI-1819/Gruppe8.git
 
 	public Werewolf() {
-
+		
 		this.setColor(Color.MAGENTA);
-
+		
 	}
-<<<<<<< HEAD
-
-=======
+	
 	
 	
 	/**
@@ -41,24 +38,8 @@ final class Werewolf extends Farmer{
      * field containing a Lamb it automatically removes (eats) it; this makes
      *  it unnecessary to use getActors() or processActors(actors).
      */	
->>>>>>> branch 'master' of https://gitlab.tubit.tu-berlin.de/AIfI-1819/Gruppe8.git
 	@Override
 	public void act() {
-<<<<<<< HEAD
-
-		if (getGrid() == null) {
-
-			return;
-
-		}
-
-//    	ArrayList<Actor> actors = getActors(); // Not neccessary.
-//      processActors(actors);
-		ArrayList<Location> moveLocs = getMoveLocations();
-		Location loc = selectMoveLocation(moveLocs);
-		makeMove(loc);
-
-=======
 		
         if (getGrid() == null)
             return;
@@ -67,7 +48,6 @@ final class Werewolf extends Farmer{
         Location loc = selectMoveLocation(moveLocs);
         makeMove(loc);	
         
->>>>>>> branch 'master' of https://gitlab.tubit.tu-berlin.de/AIfI-1819/Gruppe8.git
 	}
 
 	
@@ -82,66 +62,35 @@ final class Werewolf extends Farmer{
      * @return a list of possible locations for the next move
      */
 	@Override
-	public ArrayList<Location> getMoveLocations() {
-
-<<<<<<< HEAD
+    public ArrayList<Location> getMoveLocations(){
+		
 		ArrayList<Location> moveLocs = new ArrayList<Location>();
-		Location currentLoc = getLocation();
-
-		// Primary Criteria: Return adjacent locations that contain a Lamb (Eatable
-		// Actor)
-		moveLocs = checkForLamb(currentLoc);
-
-		if (moveLocs.size() > 0) {
-
+		Location currentLoc = getLocation() ;
+		
+		
+		// Primary Criteria: Return adjacent locations that contain a Lamb (Eatable Actor)		
+		moveLocs = checkForLamb(currentLoc) ;
+		
+		if (moveLocs.size() > 0)
 			return moveLocs;
-
-		}
-
-		// Secondary Criteria: Return all adjacent empty locations that have lambs
-		// adjacent to them
-		ArrayList<Location> emptyLocs = getGrid().getEmptyAdjacentLocations(currentLoc);
-
+        
+		
+        // Secondary Criteria: Return all adjacent empty locations that have lambs adjacent to them 
+		ArrayList<Location> emptyLocs = getGrid().getEmptyAdjacentLocations(currentLoc) ;
+		
 		for (Location loc : emptyLocs) {
-
-			if (checkForLamb(loc).size() > 0) {
-
-				moveLocs.add(loc);
-
-			}
-
-		}
-
-		if (moveLocs.size() > 0) {
-
-			return moveLocs;
-
-		}
-
+        	if(checkForLamb(loc).size() > 0)
+        		moveLocs.add(loc);     	
+        }
+		
+		
+		if (moveLocs.size() > 0 )
+			return moveLocs ;
+		
+		
 		// Tertiary Criteria: Return all empty adjacent locations
-		return emptyLocs;
+		return emptyLocs ;
 
-	}
-
-	public ArrayList<Location> checkForLamb(Location loc) {
-
-		ArrayList<Location> moveLocs = new ArrayList<Location>();
-
-		for (Location neighborLoc : getGrid().getValidAdjacentLocations(loc)) {
-
-			if (getGrid().get(neighborLoc) instanceof Eatable) {
-
-				moveLocs.add(neighborLoc);
-
-			}
-
-		}
-
-		return moveLocs;
-
-	}
-
-=======
     }
 	
 	
@@ -158,5 +107,4 @@ final class Werewolf extends Farmer{
         }
 	        return moveLocs;
     }
->>>>>>> branch 'master' of https://gitlab.tubit.tu-berlin.de/AIfI-1819/Gruppe8.git
 }
