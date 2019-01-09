@@ -31,7 +31,7 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 
 	@Override
 	public void createNewWorldWithGridSize(int x, int y) {
-		// TODO Auto-generated method stub
+		// TODO Auto- method stub
 		world = new ActorWorld(new BoundedGrid<Actor>(x, y));
 		world.show();
 	}
