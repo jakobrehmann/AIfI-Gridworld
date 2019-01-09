@@ -13,7 +13,7 @@ final class Excrement extends Animal {
 
 	public Excrement() {
 
-		this.setColor(Color.ORANGE);
+		setColor(Color.ORANGE);
 		time = 0;
 
 	}
@@ -27,7 +27,6 @@ final class Excrement extends Animal {
 		if (time >= 9) {
 
 			removeSelfFromGrid();
-
 			Flower flower = new Flower();
 			flower.putSelfInGrid(grid, loc);
 

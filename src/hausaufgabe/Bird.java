@@ -19,7 +19,9 @@ import gridworld.framework.grid.Location;
 final class Bird extends Animal {
 
 	public Bird() {
+		
 		super();
+		
 	}
 
 	// Gets a list of neighbors which frighten him
@@ -41,12 +43,15 @@ final class Bird extends Animal {
 		} else {
 
 			fleeFromNeigbors(hugeNeighbors);
+			
 		}
+		
 	}
 
 	// This Method return an ArrayList of Actors which are north, south, west or
 	// east of the Bird.
 	private ArrayList<Actor> check90DegreeFields() {
+
 		ArrayList<Actor> terrifyinglyHugeNeighbors = new ArrayList<Actor>();
 		Grid<Actor> grid = getGrid();
 
@@ -60,18 +65,25 @@ final class Bird extends Animal {
 							|| grid.get(neighborLoc).getLocation().getCol() == this.getLocation().getCol())) {
 
 				terrifyinglyHugeNeighbors.add(grid.get(neighborLoc));
+
 			}
+
 		}
+
 		return terrifyinglyHugeNeighbors;
+
 	}
 
 	// The bird tries to flee in the opposite direction of the other actors.
 	private void fleeFromNeigbors(ArrayList<Actor> hugeNeighbors) {
+
 		fleeMove();
+
 	}
 
 	// The birds direction is set in dependence of other actors.
-	// the direction will be set so, that the bird moves on a safe adjacent field if it is available.
+	// the direction will be set so, that the bird moves on a safe adjacent field if
+	// it is available.
 	private void setOppositeDirection(ArrayList<Actor> actors) {
 
 		ArrayList<Location> fleeFields = getSafe90DegreeAdjacentLocations(getLocation());
@@ -79,12 +91,15 @@ final class Bird extends Animal {
 		if (fleeFields.isEmpty() || fleeFields.size() == 4) { // If all adjacent locations are empty or occupied the
 																// birds direction does not matter
 			return;
+
 		}
 
-		if (fleeFields.size() == 1) { // if there is only one safe adjacent field, the birds direction is set in the appropriate direction  
+		if (fleeFields.size() == 1) { // if there is only one safe adjacent field, the birds direction is set in the
+										// appropriate direction
 			Location onlySafeLoc = fleeFields.get(0);
 			setDirection(getLocation().getDirectionToward(onlySafeLoc));
 			return;
+
 		}
 
 		for (Actor a : actors) {
@@ -120,6 +135,7 @@ final class Bird extends Animal {
 
 					setDirection(Location.WEST);
 					return;
+
 				}
 
 			} else { // bird is in the same row as the actor
@@ -133,7 +149,7 @@ final class Bird extends Animal {
 
 					setDirection(Location.EAST);
 					return;
-					
+
 				} else if (locationSafe(Location.NORTH, fleeFields)) {
 
 					setDirection(Location.NORTH);
@@ -143,15 +159,20 @@ final class Bird extends Animal {
 
 					setDirection(Location.SOUTH);
 					return;
+
 				}
+
 			}
+
 		}
+
 	}
 
 	// The arrayList of safe locations contains only fields directly north, south,
 	// west or east of loc.
 	// The fields are only allowed to be empty or occupied by a flower.
 	public ArrayList<Location> getSafe90DegreeAdjacentLocations(Location loc) {
+
 		ArrayList<Location> locs = new ArrayList<Location>();
 
 		for (Location neighborLoc : getGrid().getValidAdjacentLocations(loc)) {
@@ -176,9 +197,13 @@ final class Bird extends Animal {
 																													// west
 
 				iterator.remove();
+
 			}
+
 		}
+
 		return locs;
+
 	}
 
 	// A location is safe when it is contained in the arrayList of safe locations
@@ -188,7 +213,9 @@ final class Bird extends Animal {
 
 			return true;
 		}
+
 		return false;
+
 	}
 
 	// As long as the bird has not turned four times, he tries to flee on a empty
@@ -197,6 +224,7 @@ final class Bird extends Animal {
 	// If he does not find a valid field he flies to the boundary of the grid and
 	// turns right.
 	private void fleeMove() {
+
 		byte turns = 0;
 		Location loc = getLocation();
 
@@ -208,14 +236,18 @@ final class Bird extends Animal {
 
 				moveTo(loc);
 				return;
+
 			}
 
 			loc = moveVirtuallyToBoundary();
 			setDirection(getDirection() + Location.RIGHT);
 			System.out.println("Turns");
 			turns++;
+
 		}
+
 		removeSelfFromGrid();
+
 	}
 
 	// This method returns a location where the bird can settle or returns
@@ -223,9 +255,11 @@ final class Bird extends Animal {
 	// It iterates, beginning from his position, a row or a column and checks if
 	// there is a empty field or a field occupied by a flower.
 	private Location getValidLocation(Location loc) {
+
 		switch (getDirection()) {
 
 		case Location.NORTH:
+
 			for (int i = loc.getRow() - 1; i >= 0; i--) {
 
 				Location futureLoc = new Location(i, loc.getCol());
@@ -233,11 +267,15 @@ final class Bird extends Animal {
 				if (getGrid().get(futureLoc) == null || getGrid().get(futureLoc) instanceof Flower) {
 
 					return futureLoc;
+
 				}
+
 			}
+
 			return null;
-			
+
 		case Location.SOUTH:
+
 			for (int i = loc.getRow() + 1; i <= getGrid().getNumRows() - 1; i++) {
 
 				Location futureLoc = new Location(i, loc.getCol());
@@ -246,10 +284,13 @@ final class Bird extends Animal {
 
 					return futureLoc;
 				}
+
 			}
+
 			return null;
 
 		case Location.WEST:
+
 			for (int i = loc.getCol() - 1; i >= 0; i--) {
 
 				Location futureLoc = new Location(loc.getRow(), i);
@@ -257,11 +298,14 @@ final class Bird extends Animal {
 				if (getGrid().get(futureLoc) == null || getGrid().get(futureLoc) instanceof Flower) {
 
 					return futureLoc;
-				}				
+				}
+
 			}
+
 			return null;
 
 		case Location.EAST:
+
 			for (int i = loc.getCol() + 1; i <= getGrid().getNumCols() - 1; i++) {
 
 				Location futureLoc = new Location(loc.getRow(), i);
@@ -269,17 +313,25 @@ final class Bird extends Animal {
 				if (getGrid().get(futureLoc) == null || getGrid().get(futureLoc) instanceof Flower) {
 
 					return futureLoc;
+
 				}
+
 			}
+
 			return null;
+
 		default:
+
 			return null;
+
 		}
+
 	}
 
 	// returns a location at the boundary of the grid depending on the direction of
 	// the bird
 	private Location moveVirtuallyToBoundary() {
+
 		int row;
 		int col;
 
@@ -304,8 +356,11 @@ final class Bird extends Animal {
 			row = getLocation().getRow();
 			col = getGrid().getNumCols() - 1;
 			break;
+
 		}
+
 		Location boundary = new Location(row, col);
+
 		return boundary;
 
 	}

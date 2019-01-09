@@ -18,7 +18,7 @@ final class CreatorFarmer extends Farmer {
 
 	public CreatorFarmer() {
 
-		this.setColor(Color.YELLOW);
+		setColor(Color.YELLOW);
 
 	}
 

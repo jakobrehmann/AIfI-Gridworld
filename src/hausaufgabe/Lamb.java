@@ -24,20 +24,30 @@ final class Lamb extends Animal implements Eatable {
 
 		super();
 		this.setColor(Color.GRAY);
+		
 	}
 
 	@Override
 	public void act() {
+		
 		super.act();
 
 		if (super.getAge() == 4) {
+			
 			Location loc = getLocation();
 			Grid<Actor> gr = getGrid();
-//			this.removeSelfFromGrid();
-			if (gr == null)
+			
+			if (gr == null) {
+				
 				return;
+				
+			}
+			
 			Sheep newSheep = new Sheep(4);
 			newSheep.putSelfInGrid(gr, loc);
+			
 		}
+		
 	}
+	
 }

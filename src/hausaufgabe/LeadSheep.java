@@ -10,25 +10,25 @@ import gridworld.framework.grid.Location;
  * @author Jakob, Friedrich, Marcel
  */
 final class LeadSheep extends Sheep {
+	
 	private Grid<Actor> grid;
 	private Location loc;
+	private int newAge;
 
 	public LeadSheep(Grid<Actor> grid) {
 
 		super();
-
+		newAge = ((Animal) grid.get(loc)).getAge();
 		this.grid = grid;
-		this.loc = chooseLocation();
-
-		int newAge = ((Animal) grid.get(loc)).getAge();
-		this.setAge(newAge);
-
-		this.setColor(Color.RED);
-		this.putSelfInGrid(grid, loc);
+		loc = chooseLocation();
+		setAge(newAge);
+		setColor(Color.RED);
+		putSelfInGrid(grid, loc);
 
 	}
 
 	private Location chooseLocation() {
+		
 		int maxAge = 0;
 		Location locOldestSheep = null;
 
@@ -44,8 +44,13 @@ final class LeadSheep extends Sheep {
 					maxAge = age;
 					locOldestSheep = loc;
 				}
+				
 			}
+			
 		}
+		
 		return locOldestSheep;
+		
 	}
+	
 }
