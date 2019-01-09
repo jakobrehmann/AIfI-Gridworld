@@ -23,18 +23,20 @@ public class FriedrichTestet {
 		world.add(storage2);
 		Location locBiogas = storage2.getLocation();
 
-//		world.add(new Werewolf());
+		world.add(new Werewolf());
 		world.add(new SheepShearer(storage));
 		world.add(new SheepShearer(storage));
 		world.add(new Farmer());
-		world.add(new Tractor(storage2, locBiogas));
-		// world.add(new Tractor(storage2, locBiogas));
+		world.add(new Tractor2(storage2, locBiogas));
+//		world.add(new Tractor(storage2, locBiogas));
 		world.add(new CreatorFarmer());
+		
 		world.add(new Sheep());
 		world.add(new Bird());
-		// world.add(loc, occupant);
+//		world.add(loc, occupant);
 		world.show();
 
 	}
 
 }
+
