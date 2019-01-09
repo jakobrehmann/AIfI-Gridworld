@@ -121,7 +121,6 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 		}
 	}
 
-	// Marcel Heine actor
 	@Override
 	public void addGroupSpecificActorIfFieldEmpty(int x, int y) {
 		// TODO Auto-generated method stub
