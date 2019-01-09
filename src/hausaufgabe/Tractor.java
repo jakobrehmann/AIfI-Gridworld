@@ -2,7 +2,6 @@ package hausaufgabe;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;

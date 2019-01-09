@@ -48,6 +48,7 @@ final class WoolStorage extends Actor {
 	public String toString() {
 
 		return "" + amountOfWool;
+		
 	}
 
 }
