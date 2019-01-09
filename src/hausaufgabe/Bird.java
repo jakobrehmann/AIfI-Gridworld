@@ -19,9 +19,9 @@ import gridworld.framework.grid.Location;
 final class Bird extends Animal {
 
 	public Bird() {
-		
+
 		super();
-		
+
 	}
 
 	// Gets a list of neighbors which frighten him
@@ -43,9 +43,9 @@ final class Bird extends Animal {
 		} else {
 
 			fleeFromNeigbors(hugeNeighbors);
-			
+
 		}
-		
+
 	}
 
 	// This Method return an ArrayList of Actors which are north, south, west or
@@ -76,7 +76,7 @@ final class Bird extends Animal {
 
 	// The bird tries to flee in the opposite direction of the other actors.
 	private void fleeFromNeigbors(ArrayList<Actor> hugeNeighbors) {
-
+		setOppositeDirection(hugeNeighbors);
 		fleeMove();
 
 	}
@@ -241,7 +241,6 @@ final class Bird extends Animal {
 
 			loc = moveVirtuallyToBoundary();
 			setDirection(getDirection() + Location.RIGHT);
-			System.out.println("Turns");
 			turns++;
 
 		}

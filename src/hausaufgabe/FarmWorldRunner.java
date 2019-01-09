@@ -20,11 +20,11 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 		FarmWorldRunner runner = new FarmWorldRunner();
 		runner.createNewWorldWithGridSize(20, 20);
 		runner.addLambIfFieldEmpty(10, 10);
-//		runner.addCreatorFarmerIfFieldEmpty(7, 4);
-//		runner.addFarmerIfFieldEmpty(10, 10);
+		runner.addCreatorFarmerIfFieldEmpty(7, 4);
+		runner.addFarmerIfFieldEmpty(8, 10);
 		runner.addGroupSpecificActorIfFieldEmpty(12, 5);
-//		runner.addWoolStorageIfFieldEmpty(12, 14);
-//		runner.addSheepShearerIfFieldEmpty(4, 17);
+		runner.addWoolStorageIfFieldEmpty(12, 14);
+		runner.addSheepShearerIfFieldEmpty(4, 17);
 		runner.runNSteps(10000);
 
 	}
