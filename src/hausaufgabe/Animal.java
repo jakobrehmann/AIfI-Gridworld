@@ -10,9 +10,7 @@ import gridworld.framework.grid.Location;
  * An <code>Animal</code> is an actor with an age that can move and turn.
  */
 
-/* 
- * Problem 1.1 - Tier
- * Problem 1.7 - Herdentrieb
+/** 
  * @author Jakob, Friedrich, Marcel
  */
 class Animal extends Actor {

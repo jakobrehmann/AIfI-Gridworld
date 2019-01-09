@@ -5,6 +5,9 @@ import gridworld.framework.actor.Actor;
  * Singleton Design Pattern
  */
 
+/** 
+ * @author Jakob, Friedrich, Marcel
+ */
 final class WoolStorage extends Actor {
 
 	private int amountOfWool;

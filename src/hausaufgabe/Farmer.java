@@ -1,8 +1,3 @@
-/* 
- * Problem 1.3 - Tier
- * @author Jakob
- */
-
 package hausaufgabe;
 
 import java.awt.Color;
@@ -16,6 +11,9 @@ import gridworld.framework.actor.Flower;
  * flowers from grid
  */
 
+/** 
+ * @author Jakob, Friedrich, Marcel
+ */
 class Farmer extends Critter implements TerrifyinglyHuge {
 
 	public Farmer() {

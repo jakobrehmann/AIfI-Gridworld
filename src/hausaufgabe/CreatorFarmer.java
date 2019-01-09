@@ -1,8 +1,3 @@
-/* 
- * Problem 1.4 - Schoepfer
- * @author Jakob
- */
-
 package hausaufgabe;
 
 import java.awt.Color;
@@ -16,6 +11,9 @@ import gridworld.framework.grid.Location;
  * but does not collect flowers
  */
 
+/** 
+ * @author Jakob, Friedrich, Marcel
+ */
 final class CreatorFarmer extends Farmer {
 
 	public CreatorFarmer() {
