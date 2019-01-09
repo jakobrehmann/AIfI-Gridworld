@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;
 
+/** 
+ * @author Jakob, Friedrich, Marcel
+ */
 final class SheepShearer extends Farmer {
 
 	private WoolStorage storage;

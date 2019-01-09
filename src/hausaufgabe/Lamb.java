@@ -15,7 +15,9 @@ import gridworld.framework.grid.Location;
  * A <code>Lamb</code> is an actor that moves randomly turns into a
  * <code>Sheep</code> at age 4.
  */
-
+/** 
+ * @author Jakob, Friedrich, Marcel
+ */
 final class Lamb extends Animal implements Eatable {
 
 	public Lamb() {

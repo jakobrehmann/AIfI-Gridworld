@@ -8,8 +8,11 @@ import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.BoundedGrid;
 import gridworld.framework.grid.Location;
 
+/** 
+ * @author Jakob, Friedrich, Marcel
+ */
 public class FarmWorldRunner implements FarmWorldRunnerInterface {
-	
+
 	private ActorWorld world;
 
 	public static void main(String[] args) {
@@ -17,10 +20,12 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 		FarmWorldRunner runner = new FarmWorldRunner();
 		runner.createNewWorldWithGridSize(20, 20);
 		runner.addLambIfFieldEmpty(10, 10);
-		runner.addCreatorFarmerIfFieldEmpty(7, 4);
-		runner.addFarmerIfFieldEmpty(10, 10);
+//		runner.addCreatorFarmerIfFieldEmpty(7, 4);
+//		runner.addFarmerIfFieldEmpty(10, 10);
 		runner.addGroupSpecificActorIfFieldEmpty(12, 5);
-		
+//		runner.addWoolStorageIfFieldEmpty(12, 14);
+//		runner.addSheepShearerIfFieldEmpty(4, 17);
+		runner.runNSteps(10000);
 
 	}
 
@@ -117,27 +122,22 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 		}
 	}
 
-	// Marcel Heine actor
 	@Override
 	public void addGroupSpecificActorIfFieldEmpty(int x, int y) {
 		// TODO Auto-generated method stub
 		Location loc = new Location(x, y);
 
-//		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
-//			world.add(loc, new Bird()); // Marcel Heine actor
+		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
+			world.add(loc, new Bird()); // Marcel Heine actor
 //		world.add(loc, new Werewolf()); // Jakob Rehmann actor
-		
-		
-		
-		ExcrementStorage excrementStorage = ExcrementStorage.getInstance();
-		world.add(excrementStorage);
-		Location locBiogas = excrementStorage.getLocation();
-		world.add(loc, new Tractor(excrementStorage, locBiogas)); // Friedrich Voelkers actor	 
 
-//		}
-		
-		
+//		
+//		ExcrementStorage excrementStorage = ExcrementStorage.getInstance();
+//		world.add(excrementStorage);
+//		Location locBiogas = excrementStorage.getLocation();
+//		world.add(loc, new Tractor(excrementStorage, locBiogas)); // Friedrich Voelkers actor	 
 
+		}
 	}
 
 	@Override
@@ -154,13 +154,13 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 	@Override
 	public String getToStringOfActorInField(int x, int y) {
 		// TODO Auto-generated method stub
-		
-		Location loc = new Location(x, y);	
-		
+
+		Location loc = new Location(x, y);
+
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) != null) {
-			
-			 Actor actor = world.getGrid().get(loc);
-			 return actor.toString();
+
+			Actor actor = world.getGrid().get(loc);
+			return actor.toString();
 		}
 		return null;
 	}

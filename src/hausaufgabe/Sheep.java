@@ -1,7 +1,4 @@
-/* 
- * Problem 1.2 - Sheep
- * @author Marcel
- */
+
 
 package hausaufgabe;
 
@@ -13,6 +10,9 @@ import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
+/** 
+ * @author Jakob, Friedrich, Marcel
+ */
 class Sheep extends Animal implements TerrifyinglyHuge { 
 
 	private int timeSinceShear;

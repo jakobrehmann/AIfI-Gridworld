@@ -6,6 +6,9 @@ import gridworld.framework.actor.Actor;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
+/** 
+ * @author Jakob, Friedrich, Marcel
+ */
 final class LeadSheep extends Sheep {
 	private Grid<Actor> grid;
 	private Location loc;

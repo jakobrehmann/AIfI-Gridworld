@@ -67,12 +67,11 @@ final class Bird extends Animal {
 
 	// The bird tries to flee in the opposite direction of the other actors.
 	private void fleeFromNeigbors(ArrayList<Actor> hugeNeighbors) {
-		setOppositeDirection(hugeNeighbors);
 		fleeMove();
 	}
 
 	// The birds direction is set in dependence of other actors.
-	// the direction will be set so, that the bird moves on a safe adjacent field.
+	// the direction will be set so, that the bird moves on a safe adjacent field if it is available.
 	private void setOppositeDirection(ArrayList<Actor> actors) {
 
 		ArrayList<Location> fleeFields = getSafe90DegreeAdjacentLocations(getLocation());
@@ -82,7 +81,7 @@ final class Bird extends Animal {
 			return;
 		}
 
-		if (fleeFields.size() == 1) {
+		if (fleeFields.size() == 1) { // if there is only one safe adjacent field, the birds direction is set in the appropriate direction  
 			Location onlySafeLoc = fleeFields.get(0);
 			setDirection(getLocation().getDirectionToward(onlySafeLoc));
 			return;
@@ -90,7 +89,7 @@ final class Bird extends Animal {
 
 		for (Actor a : actors) {
 
-			if (a.getLocation().getCol() == getLocation().getCol()) {
+			if (a.getLocation().getCol() == getLocation().getCol()) { // bird is in the same column as the actor
 
 				if (getLocation().compareTo(a.getLocation()) == -1 && locationSafe(Location.NORTH, fleeFields)) { // Condition
 																													// checks
@@ -123,7 +122,7 @@ final class Bird extends Animal {
 					return;
 				}
 
-			} else {
+			} else { // bird is in the same row as the actor
 
 				if (getLocation().compareTo(a.getLocation()) == -1 && locationSafe(Location.WEST, fleeFields)) {
 
@@ -213,6 +212,7 @@ final class Bird extends Animal {
 
 			loc = moveVirtuallyToBoundary();
 			setDirection(getDirection() + Location.RIGHT);
+			System.out.println("Turns");
 			turns++;
 		}
 		removeSelfFromGrid();
@@ -235,6 +235,8 @@ final class Bird extends Animal {
 					return futureLoc;
 				}
 			}
+			return null;
+			
 		case Location.SOUTH:
 			for (int i = loc.getRow() + 1; i <= getGrid().getNumRows() - 1; i++) {
 
@@ -245,6 +247,7 @@ final class Bird extends Animal {
 					return futureLoc;
 				}
 			}
+			return null;
 
 		case Location.WEST:
 			for (int i = loc.getCol() - 1; i >= 0; i--) {
@@ -254,8 +257,9 @@ final class Bird extends Animal {
 				if (getGrid().get(futureLoc) == null || getGrid().get(futureLoc) instanceof Flower) {
 
 					return futureLoc;
-				}
+				}				
 			}
+			return null;
 
 		case Location.EAST:
 			for (int i = loc.getCol() + 1; i <= getGrid().getNumCols() - 1; i++) {
@@ -267,6 +271,7 @@ final class Bird extends Animal {
 					return futureLoc;
 				}
 			}
+			return null;
 		default:
 			return null;
 		}
