@@ -14,7 +14,7 @@ public class FriedrichTestet {
 //		Location Loc3 = new Location(4, 3);
 		
 
-		ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(20, 20));
+		ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(50, 50));
 
 		WoolStorage storage = WoolStorage.getInstance();
 		world.add(storage);
@@ -27,7 +27,7 @@ public class FriedrichTestet {
 		world.add(new SheepShearer(storage));
 		world.add(new SheepShearer(storage));
 		world.add(new Farmer());
-		world.add(new Tractor2(storage2, locBiogas));
+		world.add(new Tractor(storage2, locBiogas));
 //		world.add(new Tractor(storage2, locBiogas));
 		world.add(new CreatorFarmer());
 		

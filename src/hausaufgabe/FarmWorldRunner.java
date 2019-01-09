@@ -13,6 +13,7 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 	private ActorWorld world;
 
 	public static void main(String[] args) {
+		
 		FarmWorldRunner runner = new FarmWorldRunner();
 		runner.createNewWorldWithGridSize(20, 20);
 		runner.addLambIfFieldEmpty(10, 10);

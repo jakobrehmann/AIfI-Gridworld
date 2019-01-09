@@ -8,14 +8,14 @@ import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Location;
 
-final class Tractor2 extends Farmer {
+final class Tractor extends Farmer {
 
 	private ExcrementStorage storage;
 	private int excrementCounter;
 	private Location locBiogas;
 	private boolean excrementStationFull;
 
-	public Tractor2(ExcrementStorage storage, Location locBiogas) {
+	public Tractor(ExcrementStorage storage, Location locBiogas) {
 
 		setStorage(storage);
 		setColor(Color.RED);
