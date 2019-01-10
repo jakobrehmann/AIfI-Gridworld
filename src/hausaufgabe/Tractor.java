@@ -2,7 +2,6 @@ package hausaufgabe;
 
 import java.awt.Color;
 import java.util.ArrayList;
-
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Location;
@@ -54,6 +53,7 @@ final class Tractor extends Farmer {
 
 		boolean isNearExcremenetStation = false;
 
+		// remove all flowers around the tractor
 		for (Actor a : actors) {
 
 			if (a instanceof Flower) {
@@ -62,6 +62,7 @@ final class Tractor extends Farmer {
 
 			}
 
+			// check if the tractor is near an excrementstorage
 			if (a instanceof ExcrementStorage) {
 
 				isNearExcremenetStation = true;
@@ -72,6 +73,7 @@ final class Tractor extends Farmer {
 
 		if (!excrementStationFull) {
 
+			// take all excrements around the tractor, if the tractor is not full
 			for (Actor a : actors) {
 
 				if (a instanceof Excrement) {
@@ -95,6 +97,7 @@ final class Tractor extends Farmer {
 
 		} else {
 
+			// check if the tractor is already near an excrementstorage
 			if (isNearExcremenetStation) {
 
 				for (int i = 0; i < 5; i++) {
@@ -121,9 +124,13 @@ final class Tractor extends Farmer {
 	 */
 	private void goToExcrementStorage() {
 
-		ArrayList<Location> possibleNextLocations = new ArrayList<Location>(); // List with all free locations around the tractor
-		ArrayList<Location> possibleNextLocationsSort = new ArrayList<Location>(); // List with all free locations around the tractor, the current location and without the diagonal locations
-		
+		ArrayList<Location> possibleNextLocations = new ArrayList<Location>(); // List with all free locations around
+																				// the tractor
+		ArrayList<Location> possibleNextLocationsSort = new ArrayList<Location>(); // List with all free locations
+																					// around the tractor, the current
+																					// location and without the diagonal
+																					// locations
+
 		double minDistance = 100000.00; // reference distance for the sort algorithm
 		Location nextLocation = null;
 //		possibleNextLocations = null;
@@ -136,14 +143,18 @@ final class Tractor extends Farmer {
 
 			if ((tempDirection % 90) == 0) {
 
-				possibleNextLocationsSort.add(bestLoc);
+				possibleNextLocationsSort.add(bestLoc); // Adds the location, that are not diagonal, to the list
 
 			}
 
 		}
 
+		// Add the current location to the list (because maybe his current location is
+		// the best location for the next move)
 		possibleNextLocationsSort.add(getLocation());
 
+		// Sort the possible locations from the longest to the shortest distance to the
+		// excrementstorage
 		for (Location location : possibleNextLocationsSort) {
 
 			double deltaRow = location.getRow() - locBiogas.getRow();
@@ -172,7 +183,9 @@ final class Tractor extends Farmer {
 	@Override
 	public String toString() {
 
-		return getClass().getSimpleName() + " [ExcrementCounter = " + excrementCounter + "]";
+		return getClass().getSimpleName() + " [ExcrementCounter = " + excrementCounter + "]"; // print the number of
+																								// excrements from the
+																								// tractor
 
 	}
 
