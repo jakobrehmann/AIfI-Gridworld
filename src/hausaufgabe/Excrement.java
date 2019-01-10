@@ -7,6 +7,10 @@ import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
+
+/**
+ * @author Friedrich
+ */
 final class Excrement extends Animal {
 
 	private int time;

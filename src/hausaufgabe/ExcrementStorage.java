@@ -4,6 +4,9 @@ import java.awt.Color;
 
 import gridworld.framework.actor.Actor;
 
+/**
+ * @author Friedrich
+ */
 final class ExcrementStorage extends Actor {
 
 	static int amountOfExcrement;

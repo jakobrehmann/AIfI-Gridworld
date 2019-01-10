@@ -17,7 +17,9 @@ import gridworld.framework.grid.Location;
  * <code>Lamb</code> if it is nearby, or moves randomly if no Lamb is located
  * nearby.
  */
-
+/**
+ * @author Jakob Rehmann
+ */
 final class Werewolf extends Farmer {
 
 	public Werewolf() {

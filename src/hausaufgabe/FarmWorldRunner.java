@@ -28,7 +28,7 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 		runner.addSheepShearerIfFieldEmpty(4, 17);
 		String s1 = runner.getToStringOfActorInField(12 , 14) ;
 		System.out.println(s1);
-		runner.runNSteps(100) ;
+		runner.runNSteps(10000) ;
 		runner.world.show() ; // IMPORTANT
 
 	}
@@ -150,9 +150,9 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
 
-//			world.add(loc, new Bird()); // Marcel Heine actor
+			world.add(loc, new Bird()); // Marcel Heine actor
 
-			world.add(loc, new Werewolf()); // Jakob Rehmann actor
+//			world.add(loc, new Werewolf()); // Jakob Rehmann actor
 
 //			ExcrementStorage excrementStorage = ExcrementStorage.getInstance();
 //			world.add(excrementStorage);

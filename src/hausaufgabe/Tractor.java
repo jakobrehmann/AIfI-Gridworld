@@ -7,6 +7,9 @@ import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;
 import gridworld.framework.grid.Location;
 
+/**
+ * @author Friedrich
+ */
 final class Tractor extends Farmer {
 
 	private ExcrementStorage storage;
