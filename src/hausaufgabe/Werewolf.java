@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import gridworld.framework.grid.Location;
 
 /**
- * A <code>Werewolf</code> is a <code>Farmer</code> moves around the that moves
+ * A <code>Werewolf</code> is a <code>Farmer</code> who moves
  * to and removes (eats) a Actors who implement the <code>Eatable</code>
  * Interface (<code>Lamb</code>) if one is on an adjacent field, move towards a
  * <code>Lamb</code> if it is nearby, or moves randomly if no Lamb is located

@@ -11,6 +11,7 @@ import gridworld.framework.grid.Location;
 /**
  * @author Jakob, Friedrich, Marcel
  */
+
 public class FarmWorldRunner implements FarmWorldRunnerInterface {
 
 	private ActorWorld world;
@@ -25,7 +26,10 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 		runner.addGroupSpecificActorIfFieldEmpty(12, 5);
 		runner.addWoolStorageIfFieldEmpty(12, 14);
 		runner.addSheepShearerIfFieldEmpty(4, 17);
-		runner.runNSteps(10000);
+		String s1 = runner.getToStringOfActorInField(12 , 14) ;
+		System.out.println(s1);
+		runner.runNSteps(100) ;
+		runner.world.show() ; // IMPORTANT
 
 	}
 
@@ -33,7 +37,7 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 	public void createNewWorldWithGridSize(int x, int y) {
 
 		world = new ActorWorld(new BoundedGrid<Actor>(x, y));
-//		world.show();
+		//world.show();
 
 	}
 
@@ -146,9 +150,9 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
 
-			world.add(loc, new Bird()); // Marcel Heine actor
+//			world.add(loc, new Bird()); // Marcel Heine actor
 
-//			world.add(loc, new Werewolf()); // Jakob Rehmann actor
+			world.add(loc, new Werewolf()); // Jakob Rehmann actor
 
 //			ExcrementStorage excrementStorage = ExcrementStorage.getInstance();
 //			world.add(excrementStorage);
@@ -190,9 +194,10 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 	@Override
 	public void runNSteps(int n) {		
 		
-		for (int i = 0; i < n; i++) {
-//			world.show();
-//			world.step();
+		for (int i = 0 ;  i < n ; i ++)  {
+			
+			world.step();	
+			
 		}
 
 	}
