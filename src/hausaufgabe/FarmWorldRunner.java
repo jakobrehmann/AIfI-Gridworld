@@ -146,14 +146,14 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
 
-//			world.add(loc, new Bird()); // Marcel Heine actor
+			world.add(loc, new Bird()); // Marcel Heine actor
 
 //			world.add(loc, new Werewolf()); // Jakob Rehmann actor
 
-			ExcrementStorage excrementStorage = ExcrementStorage.getInstance();
-			world.add(excrementStorage);
-			Location locBiogas = excrementStorage.getLocation();
-			world.add(loc, new Tractor(excrementStorage, locBiogas)); // Friedrich Voelkers actor
+//			ExcrementStorage excrementStorage = ExcrementStorage.getInstance();
+//			world.add(excrementStorage);
+//			Location locBiogas = excrementStorage.getLocation();
+//			world.add(loc, new Tractor(excrementStorage, locBiogas)); // Friedrich Voelkers actor
 
 		}
 	}
@@ -188,12 +188,11 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 	}
 
 	@Override
-	public void runNSteps(int n) {
-
+	public void runNSteps(int n) {		
+		
 		for (int i = 0; i < n; i++) {
-
+//			world.show();
 //			world.step();
-
 		}
 
 	}
