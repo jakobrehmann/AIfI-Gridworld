@@ -91,33 +91,33 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 
 	@Override
 	public void addCreatorFarmerIfFieldEmpty(int x, int y) {
-		
+
 		Location loc = new Location(x, y);
 
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
-			
+
 			world.add(loc, new CreatorFarmer());
-			
+
 		}
 
 	}
 
 	@Override
 	public void addWoolStorageIfFieldEmpty(int x, int y) {
-		
+
 		Location loc = new Location(x, y);
 
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
-			
+
 			world.add(loc, WoolStorage.getInstance());
-			
+
 		}
 
 	}
 
 	@Override
 	public void addSheepShearerIfFieldEmpty(int x, int y) {
-		
+
 		Location loc = new Location(x, y);
 
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
@@ -132,41 +132,41 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 					world.add(loc, new SheepShearer(storage));
 					break;
 				}
-				
+
 			}
-			
+
 		}
-		
+
 	}
 
 	@Override
 	public void addGroupSpecificActorIfFieldEmpty(int x, int y) {
-		
+
 		Location loc = new Location(x, y);
 
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
-			
-			world.add(loc, new Bird()); // Marcel Heine actor
-//		world.add(loc, new Werewolf()); // Jakob Rehmann actor
 
-//		
-//		ExcrementStorage excrementStorage = ExcrementStorage.getInstance();
-//		world.add(excrementStorage);
-//		Location locBiogas = excrementStorage.getLocation();
-//		world.add(loc, new Tractor(excrementStorage, locBiogas)); // Friedrich Voelkers actor	 
+//			world.add(loc, new Bird()); // Marcel Heine actor
+
+//			world.add(loc, new Werewolf()); // Jakob Rehmann actor
+
+			ExcrementStorage excrementStorage = ExcrementStorage.getInstance();
+			world.add(excrementStorage);
+			Location locBiogas = excrementStorage.getLocation();
+			world.add(loc, new Tractor(excrementStorage, locBiogas)); // Friedrich Voelkers actor
 
 		}
 	}
 
 	@Override
 	public void addFlowerIfFieldEmpty(int x, int y) {
-		
+
 		Location loc = new Location(x, y);
 
 		if (world.getGrid().isValid(loc) && world.getGrid().get(loc) == null) {
-			
+
 			world.add(loc, new Flower());
-			
+
 		}
 
 	}
@@ -180,16 +180,22 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 
 			Actor actor = world.getGrid().get(loc);
 			return actor.toString();
-			
+
 		}
-		
+
 		return null;
-		
+
 	}
 
 	@Override
 	public void runNSteps(int n) {
-		
+
+		for (int i = 0; i < n; i++) {
+
+			world.step();
+
+		}
+
 	}
-	
+
 }

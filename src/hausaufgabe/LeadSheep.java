@@ -17,13 +17,10 @@ final class LeadSheep extends Sheep {
 	public LeadSheep(Grid<Actor> grid) {
 
 		super();
-
 		this.grid = grid;
 		this.loc = chooseLocation();
-
 		int newAge = ((Animal) grid.get(loc)).getAge();
 		this.setAge(newAge);
-
 		this.setColor(Color.RED);
 		this.putSelfInGrid(grid, loc);
 
