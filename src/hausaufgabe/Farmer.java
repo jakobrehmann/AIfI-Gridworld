@@ -9,9 +9,7 @@ import gridworld.framework.actor.Flower;
 /**
  * An <code>Farmer</code> is a Critter that moves randomly and can remove
  * flowers from grid
- */
-
-/** 
+ * 
  * @author Jakob, Friedrich, Marcel
  */
 class Farmer extends Critter implements TerrifyinglyHuge {

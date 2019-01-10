@@ -10,6 +10,12 @@ import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
 /**
+ * A <code>Sheep</code> is an <code>Animal</code> who move like an animal 
+ * (displays herd behavior and goes towards LeadSheep if no other Sheep/Lambs nearby).
+ * Additionally, a Sheep can generate a new Lamb, generate Excrement, and die (and turn
+ * into a Flower). A <code>SheepShearer</code> can also shear the wool from a Sheep, which
+ * takes 3 time intervals to regenerate.
+ * 
  * @author Jakob, Friedrich, Marcel
  */
 class Sheep extends Animal implements TerrifyinglyHuge {
@@ -37,7 +43,11 @@ class Sheep extends Animal implements TerrifyinglyHuge {
 
 	}
 
-	// Adapted from Class Animal
+	/**
+	 * The movement methods of a Sheep are the same as an Animal. Additionally, 
+	 * the Sheep can generate a new Lamb, generate Excrement, generate a LeadSheep, and 
+	 * die (remove itself from Grid, to be replaced by a flower. 
+	 */
 	@Override
 	public void act() {
 
@@ -70,6 +80,10 @@ class Sheep extends Animal implements TerrifyinglyHuge {
 		}
 
 		// Generate Lead Sheep, if none exists
+		// Note: the LeadSheep doesn't necessarily replace the this particular Sheep.
+		// In the Generator of LeadSheep, the oldest Sheep is located and replaced by 
+		// the LeadSheep
+		
 		if (!existLead()) {
 
 			new LeadSheep(grid);
@@ -87,6 +101,7 @@ class Sheep extends Animal implements TerrifyinglyHuge {
 		timeSinceShear++;
 	}
 
+	
 	private void makesExcrement(Location loc, Grid<Actor> grid) {
 		Excrement excrement = new Excrement();
 		excrement.putSelfInGrid(grid, loc);

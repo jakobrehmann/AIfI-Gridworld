@@ -7,10 +7,11 @@ import gridworld.framework.grid.Grid;
 import gridworld.framework.grid.Location;
 
 /**
- * An <code>Animal</code> is an actor with an age that can move and turn.
- */
-
-/** 
+ * An <code>Animal</code> is an actor with an increasing age that can move. Animals
+ * have a herd behavior, which means they like to move towards other herd animals
+ * (Sheep and Lambs). If they are separated from their herd, they will try to move
+ * towards the LeadSheep (oldest Sheep on the grid)
+ * 
  * @author Jakob, Friedrich, Marcel
  */
 class Animal extends Actor {
@@ -41,7 +42,12 @@ class Animal extends Actor {
 
 	}
 
-	// Adapted from Class Critter
+	/**
+	 * An Animal's movement is determined by several factors. First, it checks if it can move
+	 * to a Location adjacent to another herd animal (Sheep or Lambs). If no other herd animals
+	 * are nearby, it will check if a LeadSheep exists. If yes, it will move towards the LeadSheep;
+	 * if no, it will to a random adjacent location. The Animal's age increases with each step. 
+	 */
 	@Override
 	public void act() {
 
@@ -56,20 +62,15 @@ class Animal extends Actor {
 		Location lead = findLead();
 		Location loc = null;
 
-		/*
-		 * Herd Behavior : if Sheep/Lambs are nearby, only those move locations are
-		 * included in moveLocs
-		 */
-
-		if (herdLocs.size() > 0) {
+		if (herdLocs.size() > 0) { // if Sheep/Lambs are nearby
 
 			loc = selectMoveLocation(herdLocs);
 
-		} else if (herdLocs.size() == 0 && lead != null) { // if no sheeps/lambs nearby, and a LeadSheep exists
+		} else if (herdLocs.size() == 0 && lead != null) { // if no Sheep/Lambs are nearby, and a LeadSheep exists
 
 			loc = moveTowardsLeadSheep(moveLocs, lead);
 
-		} else {
+		} else { // if no Sheep/Lambs are nearby, and no LeadSheep exists
 
 			loc = selectMoveLocation(moveLocs);
 
@@ -80,6 +81,13 @@ class Animal extends Actor {
 
 	}
 
+	/**
+	 * This method uses the distance formula to find the move location for the Animal that
+	 * will bring it closest to the LeadSheep.
+	 * @param moveLocs is an ArrayList of all the empty Locations adjacent to the Animal. 
+	 * @param lead is the location of the LeadSHeep
+	 * @return the empty adjacent location that will bring the Animal closest to the LeadSheep
+	 */
 	private Location moveTowardsLeadSheep(ArrayList<Location> moveLocs, Location lead) {
 
 		double minDistance = 100000.00;
@@ -104,12 +112,20 @@ class Animal extends Actor {
 
 	}
 
+	
 	private ArrayList<Location> getMoveLocations() {
 
 		return getGrid().getEmptyAdjacentLocations(getLocation());
 
 	}
 
+	/**
+	 * For each possible move location, this method checks whether a herd animal (Sheep and Lamb) is located
+	 * adjacent to that location. It returns a list of location that will bring the Animal next to another 
+	 * herd Animal. 
+	 * @param locs: all the empty adjacent locations 
+	 * @return an ArrayList of possible move location that will place the Animal next to a herd animal
+	 */
 	private ArrayList<Location> getHerdLocations(ArrayList<Location> locs) {
 
 		ArrayList<Location> herdLocs = new ArrayList<Location>();
@@ -137,6 +153,10 @@ class Animal extends Actor {
 
 	}
 
+	/**
+	 * This method checks the whole grid to find the location of the LeadSheep. 
+	 * @return location of the LeadSheep.
+	 */
 	private Location findLead() {
 
 		Grid<Actor> grid = getGrid();
@@ -163,7 +183,14 @@ class Animal extends Actor {
 		return null;
 		
 	}
-
+	
+	/**
+	 * From the array of possible move locations, this method selects one location randomly.
+	 * If there are no possible move location, this method returns the current location (meaning
+	 * the Animal will not move).
+	 * @param locs: possible move location
+	 * @return one location that the Animal will move to. 
+	 */
 	private Location selectMoveLocation(ArrayList<Location> locs) {
 
 		int size = locs.size();
