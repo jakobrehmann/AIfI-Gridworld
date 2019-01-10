@@ -14,6 +14,14 @@ import gridworld.framework.grid.Location;
 /** 
  * @author Jakob, Friedrich, Marcel
  */
+
+/**
+ * A <code>CreatorFarmer</code> is a <code>Farmer</code> who moves randomly
+ * across the grid and creates a new lamb on an adjacent field if no sheep 
+ * are present on the grid. Note: As per the problem statement, the CreatorFarmer
+ * will create Lambs even if other Lambs are present.
+ */
+
 final class CreatorFarmer extends Farmer {
 
 	public CreatorFarmer() {
@@ -21,7 +29,12 @@ final class CreatorFarmer extends Farmer {
 		setColor(Color.YELLOW);
 
 	}
-
+	
+	/**
+	 *  A CreatorFarmer acts by moving to a random adjacent location (if none are free, he remains where he is).
+	 * He also checks whether there are any Sheep on the grid, and if none exist, he creates a new Lamb in an
+	 * adjacent field. 
+	 */
 	@Override
 	public void act() {
 
@@ -35,7 +48,7 @@ final class CreatorFarmer extends Farmer {
 		Location loc = selectMoveLocation(moveLocs);
 		makeMove(loc);
 
-		// Adds new Lamb if none exist
+		// Adds new Lamb if no Sheep exist
 		if (!existSheep()) {
 
 			addLamb();
@@ -44,7 +57,10 @@ final class CreatorFarmer extends Farmer {
 
 	}
 
-	// adapted from getOccupiedLocations() in BoundedGrid.java
+	/**
+	 * This function checks if any Sheep are on the grid. It returns TRUE if it can find at least one Sheep and FALSE
+	 * if it can not find any Sheep.  
+	 */
 	private boolean existSheep() {
 
 		Grid<Actor> grid = getGrid();
@@ -69,11 +85,22 @@ final class CreatorFarmer extends Farmer {
 
 	}
 
+	/**
+	 * addLamb() adds a Lamb to an adjacent free location to the CreatorFarmer. First, it finds all free adjacent locations, and then chooses one 
+	 * location randomly. If there are no adjacent free locations, no Lamb is created. 
+	 */
 	private void addLamb() {
 
 		Grid<Actor> grid = getGrid();
 		ArrayList<Location> sheepLocs = getMoveLocations();
 		Location newLoc = selectMoveLocation(sheepLocs);
+		
+		if (newLoc == this.getLocation()) { // Prevents CreatorFarmer from placing new Lamb on his own location, in which he would effectively kill himself
+			
+			return ;
+			
+		}
+		
 		Lamb newLamb = new Lamb();
 		newLamb.putSelfInGrid(grid, newLoc);
 
