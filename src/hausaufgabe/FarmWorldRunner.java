@@ -33,7 +33,7 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 	public void createNewWorldWithGridSize(int x, int y) {
 
 		world = new ActorWorld(new BoundedGrid<Actor>(x, y));
-		world.show();
+//		world.show();
 
 	}
 
@@ -192,7 +192,7 @@ public class FarmWorldRunner implements FarmWorldRunnerInterface {
 
 		for (int i = 0; i < n; i++) {
 
-			world.step();
+//			world.step();
 
 		}
 

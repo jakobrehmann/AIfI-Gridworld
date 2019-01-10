@@ -113,14 +113,17 @@ final class Tractor extends Farmer {
 
 	}
 
+	/*
+	 * Function to go to the excrement storage
+	 */
 	private void goToExcrementStorage() {
 
-		ArrayList<Location> possibleNextLocationsSort = new ArrayList<Location>();
-		ArrayList<Location> possibleNextLocations = new ArrayList<Location>();
-
-		double minDistance = 100000.00;
+		ArrayList<Location> possibleNextLocations = new ArrayList<Location>(); // List with all free locations around the tractor
+		ArrayList<Location> possibleNextLocationsSort = new ArrayList<Location>(); // List with all free locations around the tractor, the current location and without the diagonal locations
+		
+		double minDistance = 100000.00; // reference distance for the sort algorithm
 		Location nextLocation = null;
-		possibleNextLocations = null;
+//		possibleNextLocations = null;
 
 		possibleNextLocations = getGrid().getEmptyAdjacentLocations(getLocation());
 
