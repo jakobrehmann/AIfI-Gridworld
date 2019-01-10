@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import gridworld.framework.actor.Actor;
 import gridworld.framework.actor.Flower;
 
-/** 
+/**
  * @author Jakob, Friedrich, Marcel
  */
 final class SheepShearer extends Farmer {
@@ -26,6 +26,7 @@ final class SheepShearer extends Farmer {
 
 		for (Actor a : actors) {
 
+			// remove all flowers around the SheepShearer
 			if (a instanceof Flower) {
 
 				a.removeSelfFromGrid();
@@ -34,6 +35,7 @@ final class SheepShearer extends Farmer {
 
 			else if (a instanceof Sheep) {
 
+				// shear the sheep when its shearable
 				if (((Sheep) a).isShearable()) {
 
 					storage.putWool();

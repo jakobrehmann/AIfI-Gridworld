@@ -26,6 +26,7 @@ class Farmer extends Critter implements TerrifyinglyHuge {
 	@Override
 	public void processActors(ArrayList<Actor> actors) {
 
+		// remove all flowers around the farmer
 		for (Actor a : actors) {
 
 			if (a instanceof Flower) {
@@ -38,6 +39,7 @@ class Farmer extends Critter implements TerrifyinglyHuge {
 
 	}
 
+	// return the name from the class
 	@Override
 	public String toString() {
 
